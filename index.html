@@ -205,7 +205,7 @@ $('openBtn').onclick=async()=>{
   if(!['tk5-inspection-v1','tk5-inspection-v2','tk5-inspection-v3'].includes(parsed.format))throw Error('El JSON no corresponde a un proyecto TK-5.');
   await restoreProjectContent(raw,file.name);
   await rememberDiskHandle(handle);
-  if(parsed.format==='tk5-inspection-v2'){
+  if(['tk5-inspection-v2','tk5-inspection-v3'].includes(parsed.format)){
    try{await projectStorePut(state.projectName,raw)}catch(err){console.warn('Copia local:',err)}
   }
   notify('Proyecto vinculado: '+file.name+'. Las próximas aperturas reutilizarán este archivo.');
