@@ -583,10 +583,10 @@ async function restoreProjectContent(source,sourceName){
   const previousLocalName=localStorage.getItem('tk5-project-name');
   const openedName=String(d.projectName||sourceName.replace(/\.json(?: \(copia local\))?$/i,''));
   const localRecords=state.records||{};
-  const localKeys=Object.keys(localRecords).filter(k=>Object.prototype.hasOwnProperty.call(diskRecords,k));
+  const localKeys=Object.keys(localRecords);
   let recoverLocal=false;
   if(previousLocalName===openedName&&localKeys.some(k=>
-     JSON.stringify(normalizeRecord(localRecords[k]))!==JSON.stringify(normalizeRecord(diskRecords[k])))){
+     JSON.stringify(normalizeRecord(localRecords[k]))!==JSON.stringify(normalizeRecord(diskRecords[k]||recordDefaults())))){
     recoverLocal=confirm('Se detectaron marcas u observaciones locales diferentes al JSON de «'+openedName+'».\n\n¿Recuperar los cambios guardados en este navegador antes de la actualización?\n\nSi eliges Aceptar, pulsa «Guardar y siguiente» para incorporarlos al archivo JSON del disco.');
   }
   state.records=recoverLocal?Object.fromEntries(Object.entries({...diskRecords,...localRecords}).map(([k,r])=>[k,normalizeRecord(r)])):diskRecords;
