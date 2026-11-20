@@ -111,7 +111,7 @@ for(const id of ['notes','criteria'])$(id).addEventListener('input',()=>{
 });
 
 $('prevBtn').onclick=()=>move(-1);$('nextBtn').onclick=()=>move(1);/* Guardar y siguiente SOLO avanza después de verificar la escritura del JSON en disco. */
-let savingProgress=false;
+let savingProgress=false,pendingAdvanceAfterDialog=false;
 $('saveNext').onclick=async()=>{
  if(savingProgress)return;
  if(!current()){notify('No hay fotografía seleccionada.');return}
@@ -124,13 +124,13 @@ $('saveNext').onclick=async()=>{
   const handle=await handleForCurrentProject();
   if(!handle){
    notify('El proyecto todavía no tiene un JSON vinculado al disco. Utiliza Guardar proyecto una vez; después Guardar y siguiente lo actualizará.');
-   openSaveDialog();
+   pendingAdvanceAfterDialog=true;openSaveDialog();
    return;
   }
   // Los permisos de Chrome son obligatorios y nunca deben asumirse concedidos.
   if(typeof handle.queryPermission==='function'&&await handle.queryPermission({mode:'readwrite'})!=='granted'){
    notify('Chrome requiere autorizar de nuevo el archivo '+handle.name+'. Pulsa Guardar proyecto para conceder acceso.');
-   openSaveDialog();
+   pendingAdvanceAfterDialog=true;openSaveDialog();
    return;
   }
   const saved=await saveProgressFile(handle);
@@ -425,7 +425,7 @@ async function saveProgressFile(handle){
 let activeDiskHandle=null;
 async function preloadDiskHandle(){try{activeDiskHandle=await readDiskHandle()}catch(err){console.warn('Archivo anterior:',err)}}
 preloadDiskHandle();
-function closeSaveDialog(){$('saveProjectDialog').hidden=true}
+function closeSaveDialog(){$('saveProjectDialog').hidden=true;pendingAdvanceAfterDialog=false}
 function openSaveDialog(){$('projectNameInput').value=state.projectName;$('saveProjectDialog').hidden=false;$('projectNameInput').focus();$('projectNameInput').select()}
 $('saveBtn').onclick=openSaveDialog;
 $('cancelSaveProject').onclick=closeSaveDialog;
@@ -444,6 +444,7 @@ async function exportProject(){
   }else if(typeof handle.queryPermission==='function'&&await handle.queryPermission({mode:'readwrite'})!=='granted'){
    if(await handle.requestPermission({mode:'readwrite'})!=='granted')throw Error('No se autorizó la escritura de '+handle.name);
   }
+  const advanceAfterSave=pendingAdvanceAfterDialog;
   closeSaveDialog();$('saveBtn').disabled=true;
   notify('Preparando el proyecto '+name+'...');
   const json=JSON.stringify(await prepareProjectData(name));
@@ -453,6 +454,7 @@ async function exportProject(){
   try{await rememberProjectHandle(handle,name)}
   catch(indexErr){console.warn('No se guardó la referencia en Chrome:',indexErr);notify('JSON guardado en disco: '+handle.name+'. No fue posible recordar su referencia en Chrome.');return}
   notify('JSON verificado en disco: '+handle.name+' ('+(savedBytes/1048576).toFixed(1)+' MB) · '+state.photoFiles.length+' fotos · '+state.plans.filter(Boolean).length+' planos.');
+  if(advanceAfterSave)move(1);
  }catch(err){
   if(err?.name==='AbortError'){notify('Guardado cancelado. El trabajo actual permanece disponible.');return}
   console.error('Error al guardar JSON:',err);
