@@ -68,8 +68,8 @@ body:not(.workspace-layout) #recordBackdrop{display:none!important}
  .workspace-layout .gallery{height:62vh}
  .workspace-layout #recordPane{top:58px!important;right:6px!important;bottom:6px!important;width:calc(100vw - 12px)!important}
 }
-</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r42</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button">↩ Presentación anterior</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
-<main><section class="pane"><h2>01 · Ubicación en planos</h2><div class="planToolBar" style="padding:7px 9px;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><input id="addPlans" type="file" multiple accept="image/*,.pdf,application/pdf"><label for="planPickerButton" style="font-weight:bold">Plano</label><div class="planPicker" id="planPicker"><button id="planPickerButton" type="button" aria-haspopup="true" aria-expanded="false">＋ Añadir plano ▾</button><div id="planPickerMenu" class="planPickerMenu" hidden></div></div><select id="activePlan" hidden aria-hidden="true"><option value="__add__">＋ Añadir plano</option></select><label style="font-size:11px;white-space:nowrap"><input type="checkbox" id="autoTrim" checked> Ajustar márgenes</label><select id="mode" style="width:auto"><option value="select">Seleccionar marca</option><option value="rect">Marcar zona (rectángulo)</option><option value="point">Marcar punto</option><option value="camera">Marcar cámara (2 puntos)</option><option value="polygon">Marcar polígono</option></select><button id="eraseBtn" class="danger">Quitar marca</button><label id="cameraFovControl" hidden style="font-size:11px;white-space:nowrap" title="Ángulo total del cono de visión">FOV <input id="cameraFov" type="number" min="10" max="120" step="5" value="30" style="width:52px;padding:3px"></label></div><div class="twoplans" id="planCollection"><div id="emptyPlanMessage" class="emptyPlanMessage">Selecciona «＋ Añadir plano» para cargar el primer plano.</div><div class="plan"><div class="plhead"><b>PLANO 1 · FONDO</b></div><div class="canvaswrap"><canvas id="cv0"></canvas></div></div><div class="plan"><div class="plhead"><b>PLANO 2 · SOPORTES DE MEMBRANA</b></div><div class="canvaswrap"><canvas id="cv1"></canvas></div></div></div></section>
+</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r43</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button">↩ Presentación anterior</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
+<main><section class="pane"><h2>01 · Ubicación en planos</h2><div class="planToolBar" style="padding:7px 9px;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><input id="addPlans" type="file" multiple accept="image/*,.pdf,application/pdf"><label for="planPickerButton" style="font-weight:bold">Plano</label><div class="planPicker" id="planPicker"><button id="planPickerButton" type="button" aria-haspopup="true" aria-expanded="false">＋ Añadir plano ▾</button><div id="planPickerMenu" class="planPickerMenu" hidden></div></div><select id="activePlan" hidden aria-hidden="true"><option value="__add__">＋ Añadir plano</option></select><label style="font-size:11px;white-space:nowrap"><input type="checkbox" id="autoTrim" checked> Ajustar márgenes</label><select id="mode" style="width:auto"><option value="select">Seleccionar marca</option><option value="rect">Marcar zona (rectángulo)</option><option value="point">Marcar punto</option><option value="camera">Marcar cámara (2 puntos)</option><option value="line">Marcar línea</option></select><button id="eraseBtn" class="danger">Quitar marca</button><label id="cameraFovControl" hidden style="font-size:11px;white-space:nowrap" title="Ángulo total del cono de visión">FOV <input id="cameraFov" type="number" min="10" max="120" step="5" value="30" style="width:52px;padding:3px"></label><label id="cameraColorControl" hidden style="font-size:11px;white-space:nowrap" title="Color del símbolo y cono de visión CAD">Color <input id="cameraColor" type="color" value="#00a6d6" style="width:30px;height:25px;padding:1px;vertical-align:middle"></label></div><div class="twoplans" id="planCollection"><div id="emptyPlanMessage" class="emptyPlanMessage">Selecciona «＋ Añadir plano» para cargar el primer plano.</div><div class="plan"><div class="plhead"><b>PLANO 1 · FONDO</b></div><div class="canvaswrap"><canvas id="cv0"></canvas></div></div><div class="plan"><div class="plhead"><b>PLANO 2 · SOPORTES DE MEMBRANA</b></div><div class="canvaswrap"><canvas id="cv1"></canvas></div></div></div></section>
 <section class="pane"><h2>02 · Fotografías</h2><div class="stats"><span id="counts">Sin fotografías cargadas</span><div id="photoName" hidden></div><div id="photoDiagnostic" role="status" hidden></div></div><div class="gallery"><div class="toolbar photoTools"><label title="Herramienta de anotación"><select id="photoTool" aria-label="Herramienta de anotación" style="width:auto"><option value="select">Seleccionar</option><option value="line">Línea recta</option><option value="pen">Mano alzada</option><option value="arrow">Flecha</option><option value="cloud">Nube de revisión</option><option value="circle">Círculo</option><option value="rect">Rectángulo</option><option value="hex">Hexágono</option><option value="text">Texto</option></select></label><button id="sortPhotos" type="button" title="Agrupar fotografías por plano asociado">Ordenar por plano</button><label title="Color de trazo"><input type="color" id="drawColor" value="#ff3030"></label><label title="Grosor"><select id="drawWidth" style="width:auto"><option value="2">Fino</option><option value="4" selected>Medio</option><option value="7">Grueso</option></select></label><button id="undoDraw" title="Deshacer última edición" aria-label="Deshacer">↶</button><button id="deleteDraw" title="Borrar anotación seleccionada" aria-label="Borrar seleccionado">⌫</button><button id="clearDraw" title="Borrar todas las anotaciones de esta fotografía" aria-label="Borrar todo">✕</button><button id="photoBack" title="Volver al zoom anterior">↶ Zoom</button><button id="photoFull" title="Pantalla completa">⛶</button></div><div id="folderStatus" class="smallnote" hidden>Carpeta no vinculada.</div><div class="photoarea" id="photoarea"><div id="emptyImg" class="hint">Haz clic en «Fotos (dos carpetas)» y selecciona la carpeta Photos_Videos, o utiliza «Fotos individuales». Si ya cargaste fotos, verifica el filtro «Todas las fotos».</div><div id="photoStage" style="display:none"><img id="photo" alt="Fotografía seleccionada"><canvas id="photoDrawing"></canvas></div><button id="exitFull" style="display:none;position:absolute;right:14px;top:14px;z-index:5">Salir de pantalla completa</button></div><div class="photoNavigation" role="group" aria-label="Navegación y filtros de fotografías"><button id="prevBtn" type="button">◀ Anterior</button><span id="indexText" class="photoCounter">0 / 0</span><button id="nextBtn" type="button">Siguiente ▶</button><select id="filter" aria-label="Filtrar fotografías"><option value="all">Todas</option><option value="located">Localizadas</option><option value="pending">Pendientes</option><option value="unlocated">Sin ubicación</option></select><button id="photoMinus" hidden>−</button><button id="photoReset" hidden>Ajustar</button><button id="photoPlus" hidden>+</button></div></div></section>
 <section class="pane" id="recordPane"><h2>03 · Registro y observaciones <button id="recordClose" type="button" aria-label="Cerrar registro" title="Cerrar registro">✕</button></h2><div class="fields"><div class="field"><label for="notes">Condición observada</label><textarea id="notes" placeholder="Elemento visible, condición, hallazgo y observaciones técnicas."></textarea></div><div class="field"><label for="criteria">Evidencia de ubicación</label><textarea id="criteria" style="min-height:65px" placeholder="Referencia verificable para confirmar o estimar la zona. Si se desconoce, indícalo."></textarea></div><div class="separator"></div><div class="field"><label for="associatePlan">Relacionar fotografía con plano</label><select id="associatePlan"><option value="">Seleccionar plano para relacionar...</option></select></div><div id="relationList" class="smallnote"></div><div id="photoPlanState" class="associationStatus" aria-live="polite" hidden></div><div id="markList" class="small" hidden>Sin marcas para esta fotografía</div><div id="markDetails" aria-label="Marcas de la fotografía"></div><div class="audit" id="reviewHint">Clasifica la ubicación y documenta el fundamento de identificación.</div></div></section></main><div id="recordBackdrop" aria-hidden="true"></div><div id="saveProjectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="saveProjectTitle"><div class="projectDialogHeader"><b id="saveProjectTitle">Guardar proyecto en disco</b><button id="closeSaveProject" type="button" aria-label="Cerrar">✕</button></div><label for="projectNameInput" style="display:block;margin:12px 0 7px;font-weight:bold">Nombre del proyecto</label><input id="projectNameInput" type="text" maxlength="100" autocomplete="off"><div class="projectDialogFooter"><button id="cancelSaveProject" type="button">Cancelar</button><button id="confirmSaveProject" class="primary" type="button">Guardar</button></div></div></div><div id="projectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="projectDialogTitle"><div class="projectDialogHeader"><b id="projectDialogTitle">Abrir proyecto</b><button id="closeProjectDialog" type="button" aria-label="Cerrar">✕</button></div><div id="projectChoices"></div></div></div><div id="imageMenu" role="menu"><button id="menuFull">⛶ Pantalla completa</button><button id="menuFit">⤢ Ajustar imagen</button></div><div id="msg" role="status" aria-live="polite" class="visuallyHidden">Aplicación preparada.</div>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script><script>
@@ -555,7 +555,8 @@ function cameraHandleAt(i,p,m){
  return 'move';
 }
 function paintMark(ctx,m,v,n){
- ctx.save();ctx.strokeStyle='#d51f2b';ctx.fillStyle='rgba(232,53,52,.08)';ctx.lineWidth=2;
+ const markColor=m.kind==='camera'?(m.color||'#00a6d6'):'#d51f2b';
+ ctx.save();ctx.strokeStyle=markColor;ctx.fillStyle='rgba(232,53,52,.08)';ctx.lineWidth=2;
  let x=v.x+m.x*v.w,y=v.y+m.y*v.h;
  if(m.kind==='camera'){
   const q=cameraGeometry(m,v);
@@ -570,13 +571,16 @@ function paintMark(ctx,m,v,n){
   }
   // Bloque técnico de cámara en planta: cuerpo, visor y lente orientados al objetivo.
   ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.angle);
-  ctx.fillStyle='rgba(255,255,255,.94)';ctx.strokeStyle='#c51f2b';ctx.lineWidth=2;
+  ctx.fillStyle='rgba(255,255,255,.94)';ctx.strokeStyle=markColor;ctx.lineWidth=2;
   ctx.beginPath();ctx.rect(-10,-6,15,12);ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.moveTo(5,-3);ctx.lineTo(10,-3);ctx.lineTo(12,-1);ctx.lineTo(12,1);ctx.lineTo(10,3);ctx.lineTo(5,3);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.rect(-5,-9,5,3);ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.arc(8,0,2.2,0,Math.PI*2);ctx.fillStyle='rgba(213,31,43,.12)';ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(8,0,2.2,0,Math.PI*2);ctx.fillStyle=markColor;ctx.globalAlpha=.18;ctx.fill();ctx.globalAlpha=1;ctx.stroke();
   ctx.restore();
   ctx.fillStyle='#b51c27';ctx.font='bold 12px Arial';ctx.fillText(String(n+1),q.x+13,q.y-11);
+ }else if(m.kind==='line'){
+  const x2=v.x+m.tx*v.w,y2=v.y+m.ty*v.h;
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x2,y2);ctx.stroke();
  }else if(m.kind==='polygon'){
   let pts=m.points||[];
   if(pts.length){ctx.beginPath();ctx.moveTo(v.x+pts[0].x*v.w,v.y+pts[0].y*v.h);for(let k=1;k<pts.length;k++)ctx.lineTo(v.x+pts[k].x*v.w,v.y+pts[k].y*v.h);if(pts.length>=3&&m.closed!==false){ctx.closePath();ctx.fill()}ctx.stroke();x=v.x+pts[0].x*v.w;y=v.y+pts[0].y*v.h}
@@ -619,6 +623,9 @@ function findPlanMark(i,p){
   }else if(m.kind==='camera'){
    const g=cameraGeometry(m,v),q={x:p.x*v.w,y:p.y*v.h};
    if(Math.hypot(q.x-g.x,q.y-g.y)<=18||Math.hypot(q.x-g.tx,q.y-g.ty)<=16||pointSegmentDistance(q,{x:g.sx,y:g.sy},{x:g.tx,y:g.ty})<=10||pointSegmentDistance(q,{x:g.sx,y:g.sy},{x:g.lx,y:g.ly})<=10||pointSegmentDistance(q,{x:g.sx,y:g.sy},{x:g.rx,y:g.ry})<=10)return index;
+  }else if(m.kind==='line'){
+   const a={x:m.x*v.w,y:m.y*v.h},b={x:m.tx*v.w,y:m.ty*v.h},q={x:p.x*v.w,y:p.y*v.h};
+   if(pointSegmentDistance(q,a,b)<=12)return index;
   }else if(m.kind==='rect'){
    const x0=Math.min(m.x,m.x+m.w),x1=Math.max(m.x,m.x+m.w),y0=Math.min(m.y,m.y+m.h),y1=Math.max(m.y,m.y+m.h);
    if(p.x>=x0-xTolerance&&p.x<=x1+xTolerance&&p.y>=y0-yTolerance&&p.y<=y1+yTolerance)return index;
@@ -640,6 +647,10 @@ function relocatePlanMark(original,dx,dy){
   dy=Math.max(-Math.min(...ys),Math.min(1-Math.max(...ys),dy));
   m.points=m.points.map(p=>({x:clamp(p.x+dx),y:clamp(p.y+dy)}));
  }else if(m.kind==='camera'){
+  const minX=Math.min(m.x,m.tx),maxX=Math.max(m.x,m.tx),minY=Math.min(m.y,m.ty),maxY=Math.max(m.y,m.ty);
+  dx=Math.max(-minX,Math.min(1-maxX,dx));dy=Math.max(-minY,Math.min(1-maxY,dy));
+  m.x=clamp(m.x+dx);m.y=clamp(m.y+dy);m.tx=clamp(m.tx+dx);m.ty=clamp(m.ty+dy);
+ }else if(m.kind==='line'){
   const minX=Math.min(m.x,m.tx),maxX=Math.max(m.x,m.tx),minY=Math.min(m.y,m.ty),maxY=Math.max(m.y,m.ty);
   dx=Math.max(-minX,Math.min(1-maxX,dx));dy=Math.max(-minY,Math.min(1-maxY,dy));
   m.x=clamp(m.x+dx);m.y=clamp(m.y+dy);m.tx=clamp(m.tx+dx);m.ty=clamp(m.ty+dy);
@@ -687,13 +698,18 @@ function attachPlanCanvas(i){
     notify('Cámara registrada: posición y dirección guardadas.');return;
    }
    if(state.working){notify('Termina o cancela la marca en curso antes de insertar una cámara.');return}
-   state.working={i,mark:{id:newMarkId(),kind:'camera',x:clamp(p.x),y:clamp(p.y),tx:clamp(p.x),ty:clamp(p.y),fov:30}};
+   state.working={i,mark:{id:newMarkId(),kind:'camera',x:clamp(p.x),y:clamp(p.y),tx:clamp(p.x),ty:clamp(p.y),fov:30,color:$('cameraColor').value}};
    drawPlans();notify('Cámara: primer clic = posición desde donde se tomó la foto; segundo clic = dirección hacia donde apunta.');return;
   }
   if($('mode').value==='point'){
    r.marks[i].push({id:newMarkId(),kind:'point',x:clamp(p.x),y:clamp(p.y)});
    if(!r.links.includes(i))r.links.push(i);
    syncDerivedStatus(r);persist();drawPlans();markList();updateReviewHint();return;
+  }
+  if($('mode').value==='line'){
+   if(state.working){notify('Termina o cancela la marca en curso antes de insertar una línea.');return}
+   state.working={i,start:p,mark:{id:newMarkId(),kind:'line',x:clamp(p.x),y:clamp(p.y),tx:clamp(p.x),ty:clamp(p.y)}};
+   c.setPointerCapture(e.pointerId);drawPlans();return;
   }
   if($('mode').value==='polygon'){
    if(state.working&&state.working.i!==i){notify('Termina o cancela el polígono del otro plano.');return}
@@ -722,6 +738,9 @@ function attachPlanCanvas(i){
   if(state.working?.i===i&&state.working.mark.kind==='camera'){
    const p=coords(i,e);if(!p)return;state.working.mark.tx=clamp(p.x);state.working.mark.ty=clamp(p.y);drawPlans();return;
   }
+  if(state.working?.i===i&&state.working.mark.kind==='line'){
+   const p=coords(i,e);if(!p)return;state.working.mark.tx=clamp(p.x);state.working.mark.ty=clamp(p.y);drawPlans();return;
+  }
   if(state.working?.i!==i||state.working.mark.kind!=='rect')return;
   const p=coords(i,e),start=state.working.start;if(!p)return;
   state.working.mark={...state.working.mark,kind:'rect',x:clamp(Math.min(p.x,start.x)),y:clamp(Math.min(p.y,start.y)),w:Math.abs(clamp(p.x)-clamp(start.x)),h:Math.abs(clamp(p.y)-clamp(start.y))};
@@ -735,6 +754,11 @@ function attachPlanCanvas(i){
     syncDerivedStatus(record());persist();markList();
     notify('Posición actualizada. Guarda el proyecto para conservarla en el JSON.');
    }
+   drawPlans();return;
+  }
+  if(state.working?.i===i&&state.working.mark.kind==='line'){
+   const m=state.working.mark;state.working=null;
+   if(Math.hypot((m.tx-m.x)*c.clientWidth,(m.ty-m.y)*c.clientHeight)>4){record().marks[i].push(m);if(!record().links.includes(i))record().links.push(i);syncDerivedStatus(record());persist();markList();updateReviewHint()}
    drawPlans();return;
   }
   if(state.working?.i!==i||state.working.mark.kind!=='rect')return;
@@ -760,9 +784,10 @@ document.addEventListener('keydown',e=>{if(e.key!=='Delete'&&e.key!=='Backspace'
 function updateCameraFovControl(){
  const host=$('cameraFovControl'),input=$('cameraFov'),sel=state.selectedPlanMark,r=record();
  const mark=sel&&sel.key===currentKey()?r?.marks?.[sel.plan]?.[sel.index]:null;
- const active=mark?.kind==='camera';
+ const active=mark?.kind==='camera',cameraMode=$('mode').value==='camera';
  host.hidden=!active;
- if(active)input.value=String(Math.max(10,Math.min(120,Number(mark.fov)||30)));
+ $('cameraColorControl').hidden=!(active||cameraMode);
+ if(active){input.value=String(Math.max(10,Math.min(120,Number(mark.fov)||30)));$('cameraColor').value=mark.color||'#00a6d6'}
 }
 function markList(){
  const r=record();ensurePlanCapacity(state.planNames.length);
@@ -773,7 +798,7 @@ function markList(){
   if(!mark.id)mark.id='LEG-'+(i+1)+'-'+(j+1);
   const row=document.createElement('div');row.className='markrow';
   const title=document.createElement('span');
-  title.textContent=planLabel(i)+' · '+mark.id+' · '+(mark.kind==='camera'?'Cámara CAD · cono '+(Number(mark.fov)||30)+'°':({rect:'Zona',point:'Punto',polygon:'Polígono'}[mark.kind]||mark.kind));
+  title.textContent=planLabel(i)+' · '+mark.id+' · '+(mark.kind==='camera'?'Cámara CAD · cono '+(Number(mark.fov)||30)+'°':({rect:'Zona',point:'Punto',line:'Línea',polygon:'Polígono (histórico)'}[mark.kind]||mark.kind));
   const btn=document.createElement('button');btn.textContent='Eliminar';
   btn.onclick=()=>{r.marks[i].splice(j,1);state.selectedPlanMark=null;syncDerivedStatus(r);persist();drawPlans();markList()};
   row.append(title,btn);host.append(row);
@@ -791,8 +816,9 @@ function finishActivePolygon(){
  if(!record().links.includes(w.i))record().links.push(w.i);
  syncDerivedStatus(record());state.working=null;persist();drawPlans();markList();notify('Polígono registrado.');
 }
-$('mode').onchange=()=>{state.working=null;state.selectedPlanMark=null;state.planMarkDrag=null;drawPlans();markList();if($('mode').value==='camera')notify('Cámara CAD: primer clic = posición de toma; segundo clic = dirección y longitud del cono de visión.')};$('eraseBtn').onclick=deleteSelectedPlanMark;
+$('mode').onchange=()=>{state.working=null;state.selectedPlanMark=null;state.planMarkDrag=null;drawPlans();markList();if($('mode').value==='camera')notify('Cámara CAD: primer clic = posición de toma; segundo clic = dirección y longitud del cono de visión.');else if($('mode').value==='line')notify('Línea: mantén presionado el botón izquierdo, arrastra y suelta para definir sus extremos.')};$('eraseBtn').onclick=deleteSelectedPlanMark;
 $('cameraFov').onchange=()=>{const sel=state.selectedPlanMark,r=record(),m=sel&&sel.key===currentKey()?r?.marks?.[sel.plan]?.[sel.index]:null;if(m?.kind!=='camera')return;m.fov=Math.max(10,Math.min(120,Number($('cameraFov').value)||30));persist();drawPlans();markList();notify('Ángulo del cono de visión actualizado.');};
+$('cameraColor').oninput=()=>{const sel=state.selectedPlanMark,r=record(),m=sel&&sel.key===currentKey()?r?.marks?.[sel.plan]?.[sel.index]:null;if(m?.kind==='camera'){m.color=$('cameraColor').value;persist();drawPlans();markList()} };
 for(let b of document.querySelectorAll('[data-zoom]'))b.onclick=()=>{let [i,d]=b.dataset.zoom.split(',').map(Number);state.zoom[i]=d===0?1:Math.max(.6,Math.min(6,state.zoom[i]*(d===1?1.3:1/1.3)));drawPlans()};window.addEventListener('resize',drawPlans);
 async function readFileAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(reader.error||new Error('Error leyendo '+file.name));reader.readAsDataURL(file)})}
 function dataUrlToFile(url,name,lastModified){const split=url.indexOf(',');if(!url.startsWith('data:')||split<0)throw Error('Imagen embebida inválida');const mime=url.slice(5,split).split(';')[0]||'application/octet-stream',base64=url.slice(split+1);const bytes=atob(base64),arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new File([arr],name,{type:mime,lastModified:lastModified||Date.now()})}
