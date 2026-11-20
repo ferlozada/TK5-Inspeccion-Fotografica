@@ -157,28 +157,36 @@ async function exportProject(){
 }
 $('openBtn').onclick=async()=>{
  try{
-  if(typeof window.showOpenFilePicker!=='function')throw Error('Se requiere Chrome o Edge para abrir archivos del disco.');
-  const handles=await window.showOpenFilePicker({
-    multiple:false,types:[{description:'Proyecto TK-5 (JSON)',accept:{'application/json':['.json']}}],excludeAcceptAllOption:true
-  });
-  const handle=handles?.[0];if(!handle)return;
-  const file=await handle.getFile();
-  const text=await file.text();
-  // Conservar el proyecto abierto anterior cuando el JSON no sea válido.
-  const parsed=JSON.parse(text);
-  if(!['tk5-inspection-v1','tk5-inspection-v2'].includes(parsed.format))throw Error('El archivo no es un proyecto TK-5 válido.');
-  if(state.photoFiles.length&&!confirm('¿Abrir «'+file.name+'»? Se sustituirá el trabajo actual que no hayas guardado.'))return;
-  await restoreProjectContent(text,file.name);
+  let handle=await readDiskHandle();
+  if(handle){
+   const permitted=await allowedDiskHandle(handle,'read');
+   if(!permitted){notify('Chrome no autorizó la lectura de '+handle.name+'. Vuelve a pulsar «Abrir proyecto» para conceder permiso.');return}
+  }else{
+   // Solo en la configuración inicial, o después de borrar los permisos del sitio.
+   if(typeof window.showOpenFilePicker!=='function')throw Error('Se requiere Chrome o Edge para abrir el proyecto JSON del disco.');
+   const handles=await window.showOpenFilePicker({
+     multiple:false,
+     types:[{description:'Proyecto TK-5 (JSON)',accept:{'application/json':['.json']}}],
+     excludeAcceptAllOption:true
+   });
+   handle=handles?.[0];
+   if(!handle)return;
+  }
+  const file=await handle.getFile(),raw=await file.text();
+  const parsed=JSON.parse(raw);
+  if(!['tk5-inspection-v1','tk5-inspection-v2'].includes(parsed.format))throw Error('El JSON no corresponde a un proyecto TK-5 compatible.');
+  if(state.photoFiles.length&&!confirm('¿Abrir «'+file.name+'»? Los cambios actuales no guardados serán reemplazados.'))return;
+  await restoreProjectContent(raw,file.name);
   await rememberDiskHandle(handle);
-  notify('ABIERTO DESDE DISCO: '+file.name+'. El siguiente guardado utilizará este mismo archivo.');
+  notify('Proyecto abierto desde disco: '+file.name+'. Las fotos, planos, marcas y comentarios están disponibles.');
  }catch(err){
   if(err?.name==='AbortError')return;
-  console.error('Error al abrir proyecto del disco:',err);
-  notify('No se pudo abrir el proyecto: '+err.message);
-  alert('No se pudo abrir el JSON:\n'+err.message);
+  console.error('No fue posible abrir el proyecto:',err);
+  if(err?.name==='NotFoundError')notify('El proyecto guardado fue movido o renombrado. Usa «⋯ → Importar JSON» para recuperarlo desde su nueva ubicación.');
+  else notify('Error al abrir proyecto: '+err.message);
+  alert('No se pudo abrir el proyecto.\n'+err.message+'\nSi moviste el JSON, utiliza «⋯ → Importar JSON».');
  }
 };
-
 $('backupBtn').onclick=async()=>{
  try{
   const name=state.projectName||'TK5_Inspeccion_Fotografica';
