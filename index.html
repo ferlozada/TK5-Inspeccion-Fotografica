@@ -19,7 +19,7 @@ main{flex:1 1 auto;height:auto;min-height:0;gap:5px;padding:5px}
 .planToolBar>#planPickerButton,.planPicker>#planPickerButton{width:100%!important;max-width:none!important;min-width:0!important;display:block!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
 .planToolBar>label[for="planPickerButton"],.planToolBar>label:has(#autoTrim),.planToolBar>#mode,.planToolBar>#eraseBtn{flex:0 0 auto}
 .plan .plhead{display:none!important}
-</style></head><body><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r31</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
+</style></head><body><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r32</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
 <main><section class="pane"><h2>01 · Ubicación en planos</h2><div class="planToolBar" style="padding:7px 9px;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><input id="addPlans" type="file" multiple accept="image/*,.pdf,application/pdf"><label for="planPickerButton" style="font-weight:bold">Plano</label><div class="planPicker" id="planPicker"><button id="planPickerButton" type="button" aria-haspopup="true" aria-expanded="false">＋ Añadir plano ▾</button><div id="planPickerMenu" class="planPickerMenu" hidden></div></div><select id="activePlan" hidden aria-hidden="true"><option value="__add__">＋ Añadir plano</option></select><label style="font-size:11px;white-space:nowrap"><input type="checkbox" id="autoTrim" checked> Ajustar márgenes</label><select id="mode" style="width:auto"><option value="select">Seleccionar marca</option><option value="rect">Marcar zona (rectángulo)</option><option value="point">Marcar punto</option><option value="polygon">Marcar polígono</option></select><button id="eraseBtn" class="danger">Quitar marca</button></div><div class="twoplans" id="planCollection"><div id="emptyPlanMessage" class="emptyPlanMessage">Selecciona «＋ Añadir plano» para cargar el primer plano.</div><div class="plan"><div class="plhead"><b>PLANO 1 · FONDO</b></div><div class="canvaswrap"><canvas id="cv0"></canvas></div></div><div class="plan"><div class="plhead"><b>PLANO 2 · SOPORTES DE MEMBRANA</b></div><div class="canvaswrap"><canvas id="cv1"></canvas></div></div></div></section>
 <section class="pane"><h2>02 · Fotografías</h2><div class="stats"><span id="counts">Sin fotografías cargadas</span><div id="photoName" hidden></div><div id="photoDiagnostic" role="status" hidden></div></div><div class="gallery"><div class="toolbar photoTools"><label title="Herramienta de anotación"><select id="photoTool" aria-label="Herramienta de anotación" style="width:auto"><option value="select">Seleccionar</option><option value="line">Línea recta</option><option value="pen">Mano alzada</option><option value="arrow">Flecha</option><option value="cloud">Nube de revisión</option><option value="circle">Círculo</option><option value="rect">Rectángulo</option><option value="hex">Hexágono</option><option value="text">Texto</option></select></label><label title="Color de trazo"><input type="color" id="drawColor" value="#ff3030"></label><label title="Grosor"><select id="drawWidth" style="width:auto"><option value="2">Fino</option><option value="4" selected>Medio</option><option value="7">Grueso</option></select></label><button id="undoDraw" title="Deshacer última edición" aria-label="Deshacer">↶</button><button id="deleteDraw" title="Borrar anotación seleccionada" aria-label="Borrar seleccionado">⌫</button><button id="clearDraw" title="Borrar todas las anotaciones de esta fotografía" aria-label="Borrar todo">✕</button><button id="photoBack" title="Volver al zoom anterior">↶ Zoom</button><button id="photoFull" title="Pantalla completa">⛶</button></div><div id="folderStatus" class="smallnote" hidden>Carpeta no vinculada.</div><div class="photoarea" id="photoarea"><div id="emptyImg" class="hint">Haz clic en «Fotos (dos carpetas)» y selecciona la carpeta Photos_Videos, o utiliza «Fotos individuales». Si ya cargaste fotos, verifica el filtro «Todas las fotos».</div><div id="photoStage" style="display:none"><img id="photo" alt="Fotografía seleccionada"><canvas id="photoDrawing"></canvas></div><button id="exitFull" style="display:none;position:absolute;right:14px;top:14px;z-index:5">Salir de pantalla completa</button></div><div class="photoNavigation" role="group" aria-label="Navegación y filtros de fotografías"><button id="prevBtn" type="button">◀ Anterior</button><span id="indexText" class="photoCounter">0 / 0</span><button id="nextBtn" type="button">Siguiente ▶</button><select id="filter" aria-label="Filtrar fotografías"><option value="all">Todas</option><option value="located">Localizadas</option><option value="pending">Pendientes</option><option value="unlocated">Sin ubicación</option></select><button id="photoMinus" hidden>−</button><button id="photoReset" hidden>Ajustar</button><button id="photoPlus" hidden>+</button></div></div></section>
 <section class="pane"><h2>03 · Registro y observaciones</h2><div class="fields"><div class="field"><label for="notes">Condición observada</label><textarea id="notes" placeholder="Elemento visible, condición, hallazgo y observaciones técnicas."></textarea></div><div class="field"><label for="criteria">Evidencia de ubicación</label><textarea id="criteria" style="min-height:65px" placeholder="Referencia verificable para confirmar o estimar la zona. Si se desconoce, indícalo."></textarea></div><div class="separator"></div><div class="field"><label for="associatePlan">Relacionar fotografía con plano</label><select id="associatePlan"><option value="">Seleccionar plano para relacionar...</option></select></div><div id="relationList" class="smallnote"></div><div id="photoPlanState" class="associationStatus" aria-live="polite" hidden></div><div id="markList" class="small" hidden>Sin marcas para esta fotografía</div><div id="markDetails" aria-label="Marcas de la fotografía"></div><div class="audit" id="reviewHint">Clasifica la ubicación y documenta el fundamento de identificación.</div></div></section></main><div id="saveProjectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="saveProjectTitle"><div class="projectDialogHeader"><b id="saveProjectTitle">Guardar proyecto en disco</b><button id="closeSaveProject" type="button" aria-label="Cerrar">✕</button></div><label for="projectNameInput" style="display:block;margin:12px 0 7px;font-weight:bold">Nombre del proyecto</label><input id="projectNameInput" type="text" maxlength="100" autocomplete="off"><div class="projectDialogFooter"><button id="cancelSaveProject" type="button">Cancelar</button><button id="confirmSaveProject" class="primary" type="button">Guardar</button></div></div></div><div id="projectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="projectDialogTitle"><div class="projectDialogHeader"><b id="projectDialogTitle">Abrir proyecto</b><button id="closeProjectDialog" type="button" aria-label="Cerrar">✕</button></div><div id="projectChoices"></div></div></div><div id="imageMenu" role="menu"><button id="menuFull">⛶ Pantalla completa</button><button id="menuFit">⤢ Ajustar imagen</button></div><div id="msg" role="status" aria-live="polite" class="visuallyHidden">Aplicación preparada.</div>
@@ -78,7 +78,7 @@ const recordDefaults=()=>({status:'pending',quality:'usable',element:'',referenc
 function normalizeRecord(r){const b=recordDefaults();let v={...b,...r};v.marks=Array.isArray(r?.marks)?r.marks.map(a=>Array.isArray(a)?a:[]):[[],[]];v.links=Array.isArray(r?.links)?r.links.filter(Number.isInteger):[];v.marks.forEach((a,i)=>{if(a.length&&!v.links.includes(i))v.links.push(i)});v.annotations=Array.isArray(r?.annotations)?r.annotations:[];return v;}
 let nextMarkId=0;function newMarkId(){nextMarkId+=1;return 'M-'+Date.now().toString(36)+'-'+nextMarkId.toString(36)}
 function readSaved(){try{let s=JSON.parse(localStorage.getItem(KEY)||'{}');state.records=Object.fromEntries(Object.entries(s.records||{}).map(([k,r])=>[k,normalizeRecord(r)]));state.planNames=Array.isArray(s.planNames)?s.planNames.map((x,i)=>x||'Plano '+(i+1)):[];ensurePlanCapacity(state.planNames.length);}catch(e){console.warn(e)}}readSaved();
-function persist(){state.diskDirty=true;showProjectState();try{localStorage.setItem(KEY,JSON.stringify({records:state.records,planNames:state.planNames}));}catch(e){notify('El almacenamiento local está lleno: guarda el proyecto JSON.')}}
+function persist(){state.changeVersion=(state.changeVersion||0)+1;state.diskDirty=true;showProjectState();try{localStorage.setItem(KEY,JSON.stringify({records:state.records,planNames:state.planNames}));}catch(e){notify('El almacenamiento local está lleno: guarda el proyecto JSON.')}}
 function showProjectState(){if($('activeProjectName'))$('activeProjectName').textContent='Proyecto: '+state.projectName;if($('saveState'))$('saveState').textContent=state.diskDirty?'Cambios sin guardar en JSON':'Sin cambios pendientes'}
 function notify(s){$('msg').textContent=s}
 const photoPaths=new WeakMap();function fileKey(f){return (photoPaths.get(f)||f.webkitRelativePath||f.name).replace(/\\/g,'/')}
@@ -162,58 +162,86 @@ for(const id of ['notes','criteria'])$(id).addEventListener('input',()=>{
  persist();markList();updateReviewHint();$('counts').textContent=countsSummary();
 });
 
-/* JFLO r31: todo cambio se guarda en el JSON antes de navegar.
-   La foto no cambia si el archivo no puede escribirse y verificarse. */
+/* JFLO r32: navegación transparente. La copia local se confirma antes
+   del cambio de fotografía; sincronizar JSON no provoca ventanas. */
 let savingProgress=false,pendingNavigationAfterDialog=null;
-let lastGalleryFilter=$('filter').value;
+let lastGalleryFilter=$('filter').value,autoDiskSyncRunning=false;
 function setGalleryNavigationBusy(busy){
  for(const id of ['prevBtn','nextBtn','filter'])$(id).disabled=busy;
+}
+async function autosaveMetadata(){
+ const db=await autosaveDatabase();
+ try{
+  await new Promise((resolve,reject)=>{
+   const tx=db.transaction('snapshots','readwrite');
+   tx.objectStore('snapshots').put({
+    name:state.projectName, savedAt:new Date().toISOString(),
+    records:state.records,planNames:[...state.planNames]
+   });
+   tx.oncomplete=resolve;
+   tx.onerror=()=>reject(tx.error||Error('No se pudo guardar la copia local'));
+   tx.onabort=()=>reject(tx.error||Error('La copia local fue interrumpida'));
+  });
+ }finally{db.close()}
+}
+async function readAutosave(name){
+ const db=await autosaveDatabase();
+ try{return await new Promise((resolve,reject)=>{
+  const q=db.transaction('snapshots','readonly').objectStore('snapshots').get(name);
+  q.onsuccess=()=>resolve(q.result||null);q.onerror=()=>reject(q.error);
+ })}finally{db.close()}
+}
+async function autosaveDatabase(){
+ return new Promise((resolve,reject)=>{
+  const q=indexedDB.open('tk5-autosave-v1',1);
+  q.onupgradeneeded=()=>{if(!q.result.objectStoreNames.contains('snapshots'))q.result.createObjectStore('snapshots',{keyPath:'name'})};
+  q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);
+ });
+}
+async function queueAutomaticDiskSync(){
+ if(autoDiskSyncRunning)return;
+ autoDiskSyncRunning=true;
+ try{
+  const handle=await handleForCurrentProject();
+  // No se solicitan permisos ni se abre el selector durante la navegación.
+  if(!handle||typeof handle.queryPermission!=='function'||
+     await handle.queryPermission({mode:'readwrite'})!=='granted')return;
+  const before=state.changeVersion||0;
+  await saveProgressFile(handle);
+  if((state.changeVersion||0)===before){state.diskDirty=false;showProjectState()}
+  // Si hubo cambios mientras se guardaba, se conservan en la copia local.
+ }catch(err){
+  console.warn('JSON pendiente de sincronización; copia local conservada:',err);
+ }finally{autoDiskSyncRunning=false}
 }
 async function saveBeforePhotoTransition(action){
  if(savingProgress)return;
  if(!current()){action();return}
  closeInlineText(true);
- // El registro en navegador protege el trabajo incluso si Chrome exige permisos
- // o el disco falla; no se confunde con un guardado JSON confirmado.
  persist();
  savingProgress=true;setGalleryNavigationBusy(true);
  try{
-  const handle=await handleForCurrentProject();
-  if(!handle){
-   pendingNavigationAfterDialog=action;
-   notify('Selecciona una vez el archivo JSON mediante Guardar proyecto. La navegación continuará después de guardarlo.');
-   openSaveDialog();return;
-  }
-  if(typeof handle.queryPermission==='function'&&await handle.queryPermission({mode:'readwrite'})!=='granted'){
-   pendingNavigationAfterDialog=action;
-   notify('Se requiere autorización para escribir el JSON. Confirma Guardar proyecto antes de navegar.');
-   openSaveDialog();return;
-  }
-  const saved=await saveProgressFile(handle);
-  state.diskDirty=false;showProjectState();
-  notify('JSON actualizado y verificado en disco: '+saved.name+'. Se conservaron planos, marcas, fotografías y observaciones.');
+  await autosaveMetadata();
   action();
+  // Ejecutar la sincronización opcional después de navegar sin bloquear el visor.
+  void queueAutomaticDiskSync();
  }catch(err){
-  console.error('Error de guardado automático al navegar:',err);
-  notify('No se cambió la fotografía porque el JSON no se pudo guardar: '+err.message);
-  alert('No se pudo guardar el proyecto en el JSON del disco.\n'+err.message+'\nLa fotografía actual y sus anotaciones permanecen disponibles.');
+  console.error('No se pudo asegurar la copia local antes de navegar:',err);
+  notify('No se cambió de fotografía: no fue posible conservar los datos. '+err.message);
  }finally{savingProgress=false;setGalleryNavigationBusy(false)}
 }
 function navigateSaved(direction){
  if(!state.photos.length)return;
  const target=Math.max(0,Math.min(state.photos.length-1,state.pos+direction));
- if(target===state.pos)return;
- saveBeforePhotoTransition(()=>move(direction));
+ if(target!==state.pos)void saveBeforePhotoTransition(()=>move(direction));
 }
 $('prevBtn').onclick=()=>navigateSaved(-1);
 $('nextBtn').onclick=()=>navigateSaved(1);
 $('filter').onchange=()=>{
- const chosen=$('filter').value;
+ const selected=$('filter').value;
  $('filter').value=lastGalleryFilter;
- saveBeforePhotoTransition(()=>{
-  $('filter').value=chosen;
-  lastGalleryFilter=chosen;
-  buildList();
+ void saveBeforePhotoTransition(()=>{
+  $('filter').value=selected;lastGalleryFilter=selected;buildList();
  });
 };
 $('folderInput').onchange=e=>{unique(e.target.files);e.target.value=''};$('photosInput').onchange=e=>{unique(e.target.files);e.target.value=''};
@@ -799,20 +827,17 @@ async function restoreProjectContent(source,sourceName){
    records[key]={...base,...val,annotations:Array.isArray(val.annotations)?val.annotations.filter(x=>x&&typeof x==='object'&&typeof x.kind==='string'):[],links:Array.isArray(val.links)?val.links.filter(Number.isInteger):[],marks:Array.from({length:m.length},(_,i)=>Array.isArray(m[i])?m[i].filter(x=>x&&typeof x==='object'&&['point','rect','polygon'].includes(x.kind)&& (x.kind==='polygon'?Array.isArray(x.points)&&x.points.length>=3&&x.points.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)): [x.x,x.y].every(Number.isFinite)&& (x.kind==='point'||[x.w,x.h].every(Number.isFinite)))):[])};
   }
   const diskRecords=Object.fromEntries(Object.entries(records).map(([k,r])=>[k,normalizeRecord(r)]));
-  // En versiones anteriores, «Guardar y siguiente» solo escribía en localStorage.
-  // Se ofrece recuperar esas anotaciones antes de sobrescribirlas con el JSON viejo.
-  const previousLocalName=localStorage.getItem('tk5-project-name');
   const openedName=String(d.projectName||sourceName.replace(/\.json(?: \(copia local\))?$/i,''));
-  const localRecords=state.records||{};
-  const localKeys=Object.keys(localRecords);
-  let recoverLocal=false;
-  if(previousLocalName===openedName&&localKeys.some(k=>
-     JSON.stringify(normalizeRecord(localRecords[k]))!==JSON.stringify(normalizeRecord(diskRecords[k]||recordDefaults())))){
-    recoverLocal=confirm('Se detectaron marcas u observaciones locales diferentes al JSON de «'+openedName+'».\n\n¿Recuperar los cambios guardados en este navegador antes de la actualización?\n\nSi eliges Aceptar, pulsa «Guardar y siguiente» para incorporarlos al archivo JSON del disco.');
-  }
-  state.records=recoverLocal?Object.fromEntries(Object.entries({...diskRecords,...localRecords}).map(([k,r])=>[k,normalizeRecord(r)])):diskRecords;
+  let backup=null;
+  try{backup=await readAutosave(openedName)}catch(e){console.warn('Copia de trabajo no disponible:',e)}
+  const recoverLocal=!!(backup&&Date.parse(backup.savedAt||'')>Date.parse(d.savedAt||'1970-01-01'));
+  // Si hay una copia local posterior al archivo JSON, recuperarla sin preguntar.
+  state.records=recoverLocal?
+   Object.fromEntries(Object.entries({...diskRecords,...backup.records}).map(([k,r])=>[k,normalizeRecord(r)])):
+   diskRecords;
   const filePlanNames=Array.isArray(d.planNames)?d.planNames.map(String):[];
-  state.planNames=recoverLocal&&state.planNames.length===filePlanNames.length?[...state.planNames]:filePlanNames;
+  state.planNames=recoverLocal&&Array.isArray(backup.planNames)&&backup.planNames.length===filePlanNames.length?
+   [...backup.planNames]:filePlanNames;
   ensurePlanCapacity(state.planNames.length);
   if(['tk5-inspection-v2','tk5-inspection-v3'].includes(d.format)){
    if(d.projectName)state.projectName=String(d.projectName);
@@ -825,7 +850,7 @@ async function restoreProjectContent(source,sourceName){
      const im=new Image();im.src=d.planImages[i];await im.decode();state.plans[i]=im;state.planBounds[i]=findDrawingBounds(im);state.zoom[i]=1;state.planPan[i]={x:0,y:0};
    }
   }
-  refreshPlanOptions();persist();buildList();syncVisiblePlan();drawPlans();state.diskDirty=recoverLocal;showProjectState();if(recoverLocal)notify('Se recuperaron cambios locales de anotación. Guarda y siguiente para incorporarlos al JSON del disco.');
+  refreshPlanOptions();persist();buildList();syncVisiblePlan();drawPlans();state.diskDirty=recoverLocal;showProjectState();
   notify(['tk5-inspection-v2','tk5-inspection-v3'].includes(d.format)?'Proyecto '+state.projectName+' recuperado: '+state.photoFiles.length+' fotografías, planos, marcas y comentarios.':'Proyecto JSON anterior recuperado. Selecciona fotos y planos para volver a asociarlos.');
  }catch(err){console.error('Error al importar JSON:',err);notify('ERROR JSON ['+sourceName+']: '+err.message);alert('No se pudo abrir el proyecto JSON.\n\nProyecto: '+sourceName+'\nDetalle: '+err.message);throw err}
 }
