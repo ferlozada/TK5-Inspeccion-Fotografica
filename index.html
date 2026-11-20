@@ -577,8 +577,22 @@ async function restoreProjectContent(source,sourceName){
    const m=Array.isArray(val.marks)?val.marks:[];
    records[key]={...base,...val,annotations:Array.isArray(val.annotations)?val.annotations.filter(x=>x&&typeof x==='object'&&typeof x.kind==='string'):[],links:Array.isArray(val.links)?val.links.filter(Number.isInteger):[],marks:Array.from({length:m.length},(_,i)=>Array.isArray(m[i])?m[i].filter(x=>x&&typeof x==='object'&&['point','rect','polygon'].includes(x.kind)&& (x.kind==='polygon'?Array.isArray(x.points)&&x.points.length>=3&&x.points.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)): [x.x,x.y].every(Number.isFinite)&& (x.kind==='point'||[x.w,x.h].every(Number.isFinite)))):[])};
   }
-  state.records=Object.fromEntries(Object.entries(records).map(([k,r])=>[k,normalizeRecord(r)]));
-  state.planNames=Array.isArray(d.planNames)?d.planNames.map(String):[];ensurePlanCapacity(state.planNames.length);
+  const diskRecords=Object.fromEntries(Object.entries(records).map(([k,r])=>[k,normalizeRecord(r)]));
+  // En versiones anteriores, «Guardar y siguiente» solo escribía en localStorage.
+  // Se ofrece recuperar esas anotaciones antes de sobrescribirlas con el JSON viejo.
+  const previousLocalName=localStorage.getItem('tk5-project-name');
+  const openedName=String(d.projectName||sourceName.replace(/\.json(?: \(copia local\))?$/i,''));
+  const localRecords=state.records||{};
+  const localKeys=Object.keys(localRecords).filter(k=>Object.prototype.hasOwnProperty.call(diskRecords,k));
+  let recoverLocal=false;
+  if(previousLocalName===openedName&&localKeys.some(k=>
+     JSON.stringify(normalizeRecord(localRecords[k]))!==JSON.stringify(normalizeRecord(diskRecords[k])))){
+    recoverLocal=confirm('Se detectaron marcas u observaciones locales diferentes al JSON de «'+openedName+'».\n\n¿Recuperar los cambios guardados en este navegador antes de la actualización?\n\nSi eliges Aceptar, pulsa «Guardar y siguiente» para incorporarlos al archivo JSON del disco.');
+  }
+  state.records=recoverLocal?Object.fromEntries(Object.entries({...diskRecords,...localRecords}).map(([k,r])=>[k,normalizeRecord(r)])):diskRecords;
+  const filePlanNames=Array.isArray(d.planNames)?d.planNames.map(String):[];
+  state.planNames=recoverLocal&&state.planNames.length===filePlanNames.length?[...state.planNames]:filePlanNames;
+  ensurePlanCapacity(state.planNames.length);
   if(['tk5-inspection-v2','tk5-inspection-v3'].includes(d.format)){
    if(d.projectName)state.projectName=String(d.projectName);
    localStorage.setItem('tk5-project-name',state.projectName);
@@ -590,7 +604,7 @@ async function restoreProjectContent(source,sourceName){
      const im=new Image();im.src=d.planImages[i];await im.decode();state.plans[i]=im;state.planBounds[i]=findDrawingBounds(im);state.zoom[i]=1;state.planPan[i]={x:0,y:0};
    }
   }
-  refreshPlanOptions();persist();buildList();syncVisiblePlan();drawPlans();state.diskDirty=false;showProjectState();
+  refreshPlanOptions();persist();buildList();syncVisiblePlan();drawPlans();state.diskDirty=recoverLocal;showProjectState();if(recoverLocal)notify('Se recuperaron cambios locales de anotación. Guarda y siguiente para incorporarlos al JSON del disco.');
   notify(['tk5-inspection-v2','tk5-inspection-v3'].includes(d.format)?'Proyecto '+state.projectName+' recuperado: '+state.photoFiles.length+' fotografías, planos, marcas y comentarios.':'Proyecto JSON anterior recuperado. Selecciona fotos y planos para volver a asociarlos.');
  }catch(err){console.error('Error al importar JSON:',err);notify('ERROR JSON ['+sourceName+']: '+err.message);alert('No se pudo abrir el proyecto JSON.\n\nProyecto: '+sourceName+'\nDetalle: '+err.message);throw err}
 }
