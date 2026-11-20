@@ -271,7 +271,7 @@ async function getStoredFolder(){let db=await folderDB();return new Promise((res
 async function readFolder(handle){let files=[];async function visit(dir,path){for await(const [name,entry] of dir.entries()){if(entry.kind==='directory')await visit(entry,path+name+'/');else if(PHOTO_EXT.test(name)){let f=await entry.getFile();photoPaths.set(f,path+name);files.push(f)}}}await visit(handle,handle.name+'/');unique(files);$('folderStatus').textContent='Carpeta vinculada: '+handle.name+' · '+files.length+' imágenes · se recupera al reiniciar, con permiso del navegador.';notify('Fotografías recuperadas desde la carpeta vinculada: '+files.length)}
 $('linkFolder').onclick=async()=>{try{if(!window.showDirectoryPicker){notify('Chrome no admite vinculación persistente en este contexto. Usa «Fotos».');return}let h=await getStoredFolder();if(!h||!confirm('¿Recuperar la carpeta vinculada anteriormente? Pulsa Cancelar para escoger otra carpeta.'))h=await window.showDirectoryPicker({mode:'read'});if((await h.queryPermission({mode:'read'}))!=='granted'){let p=await h.requestPermission({mode:'read'});if(p!=='granted'){notify('Acceso denegado a la carpeta.');return}}await storeFolder(h);await readFolder(h)}catch(e){if(e.name!=='AbortError')notify('No se pudo vincular carpeta: '+e.message)}};
 async function restoreFolder(){try{const h=await getStoredFolder();if(!h)return;$('folderStatus').textContent='Carpeta anterior: '+h.name+' · Pulsa «Vincular carpeta» para recuperar el acceso si Chrome lo solicita.';if((await h.queryPermission({mode:'read'}))==='granted')await readFolder(h)}catch(e){console.warn('Recuperación de carpeta:',e);$('folderStatus').textContent='Pulsa «Vincular carpeta» para recuperar las fotos de tu equipo.'}}
-restoreFolder();
+/* Se inicializa al final, después de configurar la apertura automática del proyecto. */
 
 const imageData=async(file)=>{let im=await loadImg(file),c=document.createElement('canvas'),max=1800,s=Math.min(1,max/Math.max(im.width,im.height));c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));let ctx=c.getContext('2d');ctx.drawImage(im,0,0,c.width,c.height);const rr=getRecord(fileKey(file));paintAnnotations(ctx,rr.annotations||[],c.width,c.height,-1);return {data:c.toDataURL('image/jpeg',.91),ratio:c.width/c.height}};
 function planData(i,r){let im=state.plans[i];if(!im)return null;let c=document.createElement('canvas'),s=Math.min(1,1400/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);let ctx=c.getContext('2d');ctx.drawImage(im,0,0,c.width,c.height);let v={x:0,y:0,w:c.width,h:c.height};for(let n=0;n<r.marks[i].length;n++)paintMark(ctx,r.marks[i][n],v,n);return {data:c.toDataURL('image/png'),ratio:c.width/c.height}}
@@ -300,4 +300,31 @@ $('photoarea').addEventListener('wheel',e=>{
  setPhotoZoom(state.photoZoom*(e.deltaY<0?1.14:1/1.14));
 },{passive:false});
 new ResizeObserver(()=>drawPlans()).observe($('cv0').parentElement);new ResizeObserver(()=>drawPlans()).observe($('cv1').parentElement);syncVisiblePlan();drawPlans();
+/* Recuperar automáticamente el último proyecto JSON del disco.
+   Chrome permite leerlo tras reiniciar solo si conserva permiso de lectura.
+   Nunca sobrescribir registros ni fotografías cuando el acceso esté revocado. */
+async function reopenLastProject(){
+ let handle=null;
+ try{
+  handle=await readDiskHandle();
+  if(!handle){await restoreFolder();return}
+  const permission=typeof handle.queryPermission==='function'
+   ?await handle.queryPermission({mode:'read'}):'granted';
+  if(permission!=='granted'){
+   notify('Último proyecto: '+handle.name+'. Chrome necesita autorizar su lectura: pulsa «Abrir proyecto» y selecciona el mismo JSON. No se han perdido los registros.');
+   return;
+  }
+  const file=await handle.getFile();
+  const raw=await file.text();
+  const data=JSON.parse(raw);
+  if(!['tk5-inspection-v1','tk5-inspection-v2'].includes(data.format))throw Error('El último archivo no es un proyecto TK-5 válido.');
+  await restoreProjectContent(raw,file.name);
+  notify('Último proyecto abierto automáticamente desde tu disco: '+file.name+'. Fotografías, planos y anotaciones recuperados.');
+ }catch(err){
+  console.warn('No fue posible reabrir automáticamente el último proyecto:',err);
+  notify('No se pudo reabrir '+(handle?.name||'el último proyecto')+': '+err.message+'. Usa «Abrir proyecto» para recuperarlo del disco.');
+ }
+}
+reopenLastProject();
+
 </script></body></html>
