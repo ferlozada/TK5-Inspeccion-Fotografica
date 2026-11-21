@@ -75,39 +75,8 @@ body:not(.workspace-layout) #recordBackdrop{display:none!important}
  color:#13354b;background:#f0f8ff;border:1px solid #7ca5c2;
  box-shadow:0 8px 28px rgba(0,0,0,.2);font-size:13px;font-weight:600}
 #pptExportStatus[data-error="true"]{background:#fff0ef;color:#9c2029;border-color:#c77b81}
-.pptPreview[hidden]{display:none!important}
-.pptPreview{position:fixed;inset:10px;z-index:150;background:#e8edf2;border:1px solid #a4b9c9;
- box-shadow:0 12px 45px rgba(0,0,0,.35);border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
-.pptPreviewHead{background:#17354e;color:#fff;display:flex;align-items:center;justify-content:space-between;
- gap:10px;flex-wrap:wrap;padding:9px 12px}
-.pptPreviewHead strong{font-size:15px}
-.pptPreviewControls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.pptPreviewControls button{padding:6px 10px}
-#pptPreviewPage{min-width:72px;text-align:center}
-#pptPreviewBody{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;
- background:#1c2c3b;overflow:auto;padding:10px}
-#pptPreviewCanvas{display:block;max-height:100%;max-width:100%;height:auto;width:auto;background:white}
-#pptPreviewHelp{padding:8px 12px;font-size:11px;color:#2e4d64;background:#f3f7fa}
-@media(max-width:720px){.pptPreview{inset:4px}.pptPreviewHead{align-items:flex-start}
- .pptPreviewControls button{font-size:11px;padding:5px 7px}}
-</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r46</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button" title="Alternar entre vista clásica de tres paneles y vista ampliada de dos paneles">↩ Vista clásica (3 paneles)</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header><div id="pptExportStatus" role="status" aria-live="polite" hidden></div>
-<div id="pptPreview" class="pptPreview" hidden role="dialog" aria-modal="true" aria-labelledby="pptPreviewHeading">
- <div class="pptPreviewHead">
-  <strong id="pptPreviewHeading">Vista previa del PowerPoint generado</strong>
-  <div class="pptPreviewControls">
-   <button id="pptPreviewPrev" type="button">◀ Anterior</button>
-   <span id="pptPreviewPage">—</span>
-   <button id="pptPreviewNext" type="button">Siguiente ▶</button>
-   <button id="pptPreviewDownload" type="button">⬇ Descargar PPTX</button>
-   <button id="pptPreviewClose" type="button">✕ Cerrar</button>
-  </div>
- </div>
- <div id="pptPreviewBody"><canvas id="pptPreviewCanvas"></canvas></div>
- <div id="pptPreviewHelp">Vista previa en el navegador. El archivo .pptx se descarga para abrirlo y editarlo en Microsoft PowerPoint.</div>
-</div>
-<main><section class="pane"><h2>01 · Ubicación en planos</h2><div class="planToolBar" style="padding:7px 9px;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><input id="addPlans" type="file" multiple accept="image/*,.pdf,application/pdf"><label for="planPickerButton" style="font-weight:bold">Plano</label><div class="planPicker" id="planPicker"><button id="planPickerButton" type="button" aria-haspopup="true" aria-expanded="false">＋ Añadir plano ▾</button><div id="planPickerMenu" class="planPickerMenu" hidden></div></div><select id="activePlan" hidden aria-hidden="true"><option value="__add__">＋ Añadir plano</option></select><label style="font-size:11px;white-space:nowrap"><input type="checkbox" id="autoTrim" checked> Ajustar márgenes</label><select id="mode" style="width:auto"><option value="select">Seleccionar marca</option><option value="rect">Marcar zona (rectángulo)</option><option value="point">Marcar punto</option><option value="camera">Marcar cámara (2 puntos)</option><option value="line">Marcar línea</option></select><button id="eraseBtn" class="danger">Quitar marca</button><label id="cameraFovControl" hidden style="font-size:11px;white-space:nowrap" title="Ángulo total del cono de visión">FOV <input id="cameraFov" type="number" min="10" max="120" step="5" value="30" style="width:52px;padding:3px"></label><label id="cameraColorControl" hidden style="font-size:11px;white-space:nowrap" title="Color del símbolo y cono de visión CAD">Color <input id="cameraColor" type="color" value="#00a6d6" style="width:30px;height:25px;padding:1px;vertical-align:middle"></label></div><div class="twoplans" id="planCollection"><div id="emptyPlanMessage" class="emptyPlanMessage">Selecciona «＋ Añadir plano» para cargar el primer plano.</div><div class="plan"><div class="plhead"><b>PLANO 1 · FONDO</b></div><div class="canvaswrap"><canvas id="cv0"></canvas></div></div><div class="plan"><div class="plhead"><b>PLANO 2 · SOPORTES DE MEMBRANA</b></div><div class="canvaswrap"><canvas id="cv1"></canvas></div></div></div></section>
-<section class="pane"><h2>02 · Fotografías</h2><div class="stats"><span id="counts">Sin fotografías cargadas</span><div id="photoName" hidden></div><div id="photoDiagnostic" role="status" hidden></div></div><div class="gallery"><div class="toolbar photoTools"><label title="Herramienta de anotación"><select id="photoTool" aria-label="Herramienta de anotación" style="width:auto"><option value="select">Seleccionar</option><option value="line">Línea recta</option><option value="pen">Mano alzada</option><option value="arrow">Flecha</option><option value="cloud">Nube de revisión</option><option value="circle">Círculo</option><option value="rect">Rectángulo</option><option value="hex">Hexágono</option><option value="text">Texto</option></select></label><button id="sortPhotos" type="button" title="Agrupar fotografías por plano asociado">Ordenar por plano</button><label title="Color de trazo"><input type="color" id="drawColor" value="#ff3030"></label><label title="Grosor"><select id="drawWidth" style="width:auto"><option value="2">Fino</option><option value="4" selected>Medio</option><option value="7">Grueso</option></select></label><button id="undoDraw" title="Deshacer última edición" aria-label="Deshacer">↶</button><button id="deleteDraw" title="Borrar anotación seleccionada" aria-label="Borrar seleccionado">⌫</button><button id="clearDraw" title="Borrar todas las anotaciones de esta fotografía" aria-label="Borrar todo">✕</button><button id="photoBack" title="Volver al zoom anterior">↶ Zoom</button><button id="photoFull" title="Pantalla completa">⛶</button></div><div id="folderStatus" class="smallnote" hidden>Carpeta no vinculada.</div><div class="photoarea" id="photoarea"><div id="emptyImg" class="hint">Haz clic en «Fotos (dos carpetas)» y selecciona la carpeta Photos_Videos, o utiliza «Fotos individuales». Si ya cargaste fotos, verifica el filtro «Todas las fotos».</div><div id="photoStage" style="display:none"><img id="photo" alt="Fotografía seleccionada"><canvas id="photoDrawing"></canvas></div><button id="exitFull" style="display:none;position:absolute;right:14px;top:14px;z-index:5">Salir de pantalla completa</button></div><div class="photoNavigation" role="group" aria-label="Navegación y filtros de fotografías"><button id="prevBtn" type="button">◀ Anterior</button><span id="indexText" class="photoCounter">0 / 0</span><button id="nextBtn" type="button">Siguiente ▶</button><select id="filter" aria-label="Filtrar fotografías"><option value="all">Todas</option><option value="located">Localizadas</option><option value="pending">Pendientes</option><option value="unlocated">Sin ubicación</option></select><button id="photoMinus" hidden>−</button><button id="photoReset" hidden>Ajustar</button><button id="photoPlus" hidden>+</button></div></div></section>
-<section class="pane" id="recordPane"><h2>03 · Registro y observaciones <button id="recordClose" type="button" aria-label="Cerrar registro" title="Cerrar registro">✕</button></h2><div class="fields"><div class="field"><label for="notes">Condición observada</label><textarea id="notes" placeholder="Elemento visible, condición, hallazgo y observaciones técnicas."></textarea></div><div class="field"><label for="criteria">Evidencia de ubicación</label><textarea id="criteria" style="min-height:65px" placeholder="Referencia verificable para confirmar o estimar la zona. Si se desconoce, indícalo."></textarea></div><div class="separator"></div><div class="field"><label for="associatePlan">Relacionar fotografía con plano</label><select id="associatePlan"><option value="">Seleccionar plano para relacionar...</option></select></div><div id="relationList" class="smallnote"></div><div id="photoPlanState" class="associationStatus" aria-live="polite" hidden></div><div id="markList" class="small" hidden>Sin marcas para esta fotografía</div><div id="markDetails" aria-label="Marcas de la fotografía"></div><div class="audit" id="reviewHint">Clasifica la ubicación y documenta el fundamento de identificación.</div></div></section></main><div id="recordBackdrop" aria-hidden="true"></div><div id="saveProjectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="saveProjectTitle"><div class="projectDialogHeader"><b id="saveProjectTitle">Guardar proyecto en disco</b><button id="closeSaveProject" type="button" aria-label="Cerrar">✕</button></div><label for="projectNameInput" style="display:block;margin:12px 0 7px;font-weight:bold">Nombre del proyecto</label><input id="projectNameInput" type="text" maxlength="100" autocomplete="off"><div class="projectDialogFooter"><button id="cancelSaveProject" type="button">Cancelar</button><button id="confirmSaveProject" class="primary" type="button">Guardar</button></div></div></div><div id="projectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="projectDialogTitle"><div class="projectDialogHeader"><b id="projectDialogTitle">Abrir proyecto</b><button id="closeProjectDialog" type="button" aria-label="Cerrar">✕</button></div><div id="projectChoices"></div></div></div><div id="imageMenu" role="menu"><button id="menuFull">⛶ Pantalla completa</button><button id="menuFit">⤢ Ajustar imagen</button></div><div id="msg" role="status" aria-live="polite" class="visuallyHidden">Aplicación preparada.</div>
+</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r47</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button" title="Alternar entre vista clásica de tres paneles y vista ampliada de dos paneles">↩ Vista clásica (3 paneles)</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header><div id="pptExportStatus" role="status" aria-live="polite" hidden></div>
+<div id="saveProjectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="saveProjectTitle"><div class="projectDialogHeader"><b id="saveProjectTitle">Guardar proyecto en disco</b><button id="closeSaveProject" type="button" aria-label="Cerrar">✕</button></div><label for="projectNameInput" style="display:block;margin:12px 0 7px;font-weight:bold">Nombre del proyecto</label><input id="projectNameInput" type="text" maxlength="100" autocomplete="off"><div class="projectDialogFooter"><button id="cancelSaveProject" type="button">Cancelar</button><button id="confirmSaveProject" class="primary" type="button">Guardar</button></div></div></div><div id="projectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="projectDialogTitle"><div class="projectDialogHeader"><b id="projectDialogTitle">Abrir proyecto</b><button id="closeProjectDialog" type="button" aria-label="Cerrar">✕</button></div><div id="projectChoices"></div></div></div><div id="imageMenu" role="menu"><button id="menuFull">⛶ Pantalla completa</button><button id="menuFit">⤢ Ajustar imagen</button></div><div id="msg" role="status" aria-live="polite" class="visuallyHidden">Aplicación preparada.</div>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script><script>
 'use strict';
 const $=id=>document.getElementById(id);const KEY='tk5-photo-inspection-v1';const state={records:{},photoFiles:[],photos:[],pos:0,plans:[],planNames:[],zoom:[],photoZoom:1,working:null,activePlan:0,planBounds:[],planPan:[],photoPan:{x:0,y:0},photoViews:{},selectedPlanMark:null,planMarkDrag:null,projectName:localStorage.getItem('tk5-project-name')||'TK5_Inspeccion_Fotografica',diskDirty:false,photoOrderMode:'original'};
@@ -1661,64 +1630,7 @@ async function ensurePptxLibrary(){
  }
  throw Error('No se pudo cargar PptxGenJS. Verifica la conexión o los bloqueos del navegador.');
 }
-/* JFLO r46: archivo descargable + visor de la presentación real generada.
-   No se intenta iniciar PowerPoint de Windows: GitHub Pages no tiene permisos para ello. */
-let finalPptBlob=null, finalPptURL=null, pptPreviewRenderer=null, pptPreviewPosition=0;
-function downloadPowerPointFile(){
- if(!finalPptBlob)throw Error('Aún no se ha generado el archivo PowerPoint.');
- if(!finalPptURL)finalPptURL=URL.createObjectURL(finalPptBlob);
- const a=document.createElement('a');
- a.href=finalPptURL;
- a.download='TK5_Informe_Fotografico.pptx';
- a.style.display='none';
- document.body.appendChild(a);
- a.click();
- a.remove();
-}
-function closePptPreview(){
- $('pptPreview').hidden=true;
- if(pptPreviewRenderer){try{pptPreviewRenderer.destroy()}catch(e){console.warn(e)}}
- pptPreviewRenderer=null;
-}
-async function renderPptPreviewSlide(index){
- if(!pptPreviewRenderer)return;
- pptPreviewPosition=Math.max(0,Math.min(pptPreviewRenderer.slideCount-1,index));
- $('pptPreviewPrev').disabled=pptPreviewPosition===0;
- $('pptPreviewNext').disabled=pptPreviewPosition===pptPreviewRenderer.slideCount-1;
- $('pptPreviewPage').textContent=(pptPreviewPosition+1)+' / '+pptPreviewRenderer.slideCount;
- await pptPreviewRenderer.renderSlide(pptPreviewPosition,$('pptPreviewCanvas'),1280);
-}
-async function openPptPreview(blob){
- $('pptPreview').hidden=false;
- $('pptPreviewPage').textContent='Cargando…';
- $('pptPreviewPrev').disabled=true;
- $('pptPreviewNext').disabled=true;
- try{
-  const {PptxRenderer}=await import('https://esm.sh/pptx-browser@4.1.5');
-  if(!PptxRenderer)throw Error('La biblioteca de visualización no está disponible.');
-  if(pptPreviewRenderer)pptPreviewRenderer.destroy();
-  pptPreviewRenderer=new PptxRenderer();
-  await pptPreviewRenderer.load(blob);
-  await renderPptPreviewSlide(0);
- }catch(err){
-  console.warn('Vista previa PowerPoint:',err);
-  $('pptPreviewPage').textContent='Vista previa no disponible';
-  const ctx=$('pptPreviewCanvas').getContext('2d'),cv=$('pptPreviewCanvas');
-  cv.width=1150;cv.height=340;
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);
-  ctx.fillStyle='#17354e';ctx.font='bold 29px Arial';
-  ctx.fillText('Archivo PowerPoint generado',40,80);
-  ctx.fillStyle='#435d70';ctx.font='21px Arial';
-  ctx.fillText('La vista previa no se pudo cargar en el navegador.',40,136);
-  ctx.fillText('Utiliza Descargar PPTX para abrirlo en Microsoft PowerPoint.',40,176);
-  $('pptPreviewHelp').textContent='El archivo .pptx está disponible para descarga. La vista previa depende de una biblioteca externa.';
- }
-}
-$('pptPreviewClose').onclick=closePptPreview;
-$('pptPreviewPrev').onclick=()=>void renderPptPreviewSlide(pptPreviewPosition-1);
-$('pptPreviewNext').onclick=()=>void renderPptPreviewSlide(pptPreviewPosition+1);
-$('pptPreviewDownload').onclick=()=>{try{downloadPowerPointFile()}catch(e){exportStatus(e.message,true)}};
-
+/* JFLO r47: exportación directa PPTX, sin visor ni descarga duplicada. */
 async function exportPpt(){
  const button=$('pptBtn'),oldText=button.textContent;
  if(button.disabled)return;
@@ -1877,15 +1789,11 @@ async function exportPpt(){
    }
   }
   exportStatus('Finalizando archivo PowerPoint ('+slideNumber+' diapositivas)…');
-  const result=await pptx.write({outputType:'blob'});
-  const pptxMime='application/vnd.openxmlformats-officedocument.presentationml.presentation';
-  finalPptBlob=result instanceof Blob?result:new Blob([result],{type:pptxMime});
-  if(!finalPptBlob.size)throw Error('La presentación resultó vacía.');
-  if(finalPptURL)URL.revokeObjectURL(finalPptURL);
-  finalPptURL=null;
-  downloadPowerPointFile();
-  exportStatus('PowerPoint generado ('+slideNumber+' diapositivas). Archivo enviado a Descargas y vista previa abierta.');
-  await openPptPreview(finalPptBlob);
+  // PptxGenJS dispara la descarga del archivo terminado.
+  // La apertura con Microsoft PowerPoint depende de la configuración local de Chrome y Windows.
+  await pptx.writeFile({fileName:'TK5_Informe_Fotografico.pptx'});
+  exportStatus('PowerPoint generado: '+slideNumber+' diapositivas. Archivo enviado a Descargas; ábrelo desde Chrome o configura su apertura automática con PowerPoint.');
+
  }catch(e){
   console.error('Exportación PowerPoint:',e);
   exportStatus('No se pudo exportar PowerPoint: '+(e?.message||String(e)),true);
