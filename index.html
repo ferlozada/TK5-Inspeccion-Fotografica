@@ -68,7 +68,7 @@ body:not(.workspace-layout) #recordBackdrop{display:none!important}
  .workspace-layout .gallery{height:62vh}
  .workspace-layout #recordPane{top:58px!important;right:6px!important;bottom:6px!important;width:calc(100vw - 12px)!important}
 }
-</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r43</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button">↩ Presentación anterior</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
+</style></head><body class="workspace-layout"><header><div><h1>TK-5 · Clasificación y trazabilidad fotográfica</h1><div style="font-size:11px;color:#bdd0e0;margin-top:5px">Terminal Acajutla | Análisis registro Fotográfico | <span id="appVersion" title="Revisión publicada">JFLO Ver r44</span></div></div><div class="toolbar"><button id="linkFolder" title="Recordar carpeta y recuperar acceso después de reiniciar">🔗 Vincular carpeta</button><label class="filebtn">📁 Fotos<input id="folderInput" type="file" webkitdirectory directory multiple></label><label class="filebtn individualPhotos">🖼 Fotos individuales<input id="photosInput" type="file" multiple accept="image/*"></label><button id="newBtn">＋ Nuevo proyecto</button><button id="openBtn">📂 Abrir proyecto</button><button id="saveBtn">💾 Guardar proyecto</button><button id="recordToggle" type="button" aria-controls="recordPane" aria-expanded="false">☷ Registro</button><button id="layoutToggle" type="button">↩ Presentación anterior</button><details class="projectBackup"><summary title="Opciones de copia y recuperación">⋯</summary><div><button id="backupBtn" title="Descargar copia JSON independiente">Descargar JSON</button><label class="filebtn" title="Recuperar un respaldo externo JSON">Importar JSON<input id="projectInput" type="file" accept=".json,application/json"></label></div></details><button class="primary" id="pptBtn">⬇ Exportar PowerPoint</button></div></header>
 <main><section class="pane"><h2>01 · Ubicación en planos</h2><div class="planToolBar" style="padding:7px 9px;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><input id="addPlans" type="file" multiple accept="image/*,.pdf,application/pdf"><label for="planPickerButton" style="font-weight:bold">Plano</label><div class="planPicker" id="planPicker"><button id="planPickerButton" type="button" aria-haspopup="true" aria-expanded="false">＋ Añadir plano ▾</button><div id="planPickerMenu" class="planPickerMenu" hidden></div></div><select id="activePlan" hidden aria-hidden="true"><option value="__add__">＋ Añadir plano</option></select><label style="font-size:11px;white-space:nowrap"><input type="checkbox" id="autoTrim" checked> Ajustar márgenes</label><select id="mode" style="width:auto"><option value="select">Seleccionar marca</option><option value="rect">Marcar zona (rectángulo)</option><option value="point">Marcar punto</option><option value="camera">Marcar cámara (2 puntos)</option><option value="line">Marcar línea</option></select><button id="eraseBtn" class="danger">Quitar marca</button><label id="cameraFovControl" hidden style="font-size:11px;white-space:nowrap" title="Ángulo total del cono de visión">FOV <input id="cameraFov" type="number" min="10" max="120" step="5" value="30" style="width:52px;padding:3px"></label><label id="cameraColorControl" hidden style="font-size:11px;white-space:nowrap" title="Color del símbolo y cono de visión CAD">Color <input id="cameraColor" type="color" value="#00a6d6" style="width:30px;height:25px;padding:1px;vertical-align:middle"></label></div><div class="twoplans" id="planCollection"><div id="emptyPlanMessage" class="emptyPlanMessage">Selecciona «＋ Añadir plano» para cargar el primer plano.</div><div class="plan"><div class="plhead"><b>PLANO 1 · FONDO</b></div><div class="canvaswrap"><canvas id="cv0"></canvas></div></div><div class="plan"><div class="plhead"><b>PLANO 2 · SOPORTES DE MEMBRANA</b></div><div class="canvaswrap"><canvas id="cv1"></canvas></div></div></div></section>
 <section class="pane"><h2>02 · Fotografías</h2><div class="stats"><span id="counts">Sin fotografías cargadas</span><div id="photoName" hidden></div><div id="photoDiagnostic" role="status" hidden></div></div><div class="gallery"><div class="toolbar photoTools"><label title="Herramienta de anotación"><select id="photoTool" aria-label="Herramienta de anotación" style="width:auto"><option value="select">Seleccionar</option><option value="line">Línea recta</option><option value="pen">Mano alzada</option><option value="arrow">Flecha</option><option value="cloud">Nube de revisión</option><option value="circle">Círculo</option><option value="rect">Rectángulo</option><option value="hex">Hexágono</option><option value="text">Texto</option></select></label><button id="sortPhotos" type="button" title="Agrupar fotografías por plano asociado">Ordenar por plano</button><label title="Color de trazo"><input type="color" id="drawColor" value="#ff3030"></label><label title="Grosor"><select id="drawWidth" style="width:auto"><option value="2">Fino</option><option value="4" selected>Medio</option><option value="7">Grueso</option></select></label><button id="undoDraw" title="Deshacer última edición" aria-label="Deshacer">↶</button><button id="deleteDraw" title="Borrar anotación seleccionada" aria-label="Borrar seleccionado">⌫</button><button id="clearDraw" title="Borrar todas las anotaciones de esta fotografía" aria-label="Borrar todo">✕</button><button id="photoBack" title="Volver al zoom anterior">↶ Zoom</button><button id="photoFull" title="Pantalla completa">⛶</button></div><div id="folderStatus" class="smallnote" hidden>Carpeta no vinculada.</div><div class="photoarea" id="photoarea"><div id="emptyImg" class="hint">Haz clic en «Fotos (dos carpetas)» y selecciona la carpeta Photos_Videos, o utiliza «Fotos individuales». Si ya cargaste fotos, verifica el filtro «Todas las fotos».</div><div id="photoStage" style="display:none"><img id="photo" alt="Fotografía seleccionada"><canvas id="photoDrawing"></canvas></div><button id="exitFull" style="display:none;position:absolute;right:14px;top:14px;z-index:5">Salir de pantalla completa</button></div><div class="photoNavigation" role="group" aria-label="Navegación y filtros de fotografías"><button id="prevBtn" type="button">◀ Anterior</button><span id="indexText" class="photoCounter">0 / 0</span><button id="nextBtn" type="button">Siguiente ▶</button><select id="filter" aria-label="Filtrar fotografías"><option value="all">Todas</option><option value="located">Localizadas</option><option value="pending">Pendientes</option><option value="unlocated">Sin ubicación</option></select><button id="photoMinus" hidden>−</button><button id="photoReset" hidden>Ajustar</button><button id="photoPlus" hidden>+</button></div></div></section>
 <section class="pane" id="recordPane"><h2>03 · Registro y observaciones <button id="recordClose" type="button" aria-label="Cerrar registro" title="Cerrar registro">✕</button></h2><div class="fields"><div class="field"><label for="notes">Condición observada</label><textarea id="notes" placeholder="Elemento visible, condición, hallazgo y observaciones técnicas."></textarea></div><div class="field"><label for="criteria">Evidencia de ubicación</label><textarea id="criteria" style="min-height:65px" placeholder="Referencia verificable para confirmar o estimar la zona. Si se desconoce, indícalo."></textarea></div><div class="separator"></div><div class="field"><label for="associatePlan">Relacionar fotografía con plano</label><select id="associatePlan"><option value="">Seleccionar plano para relacionar...</option></select></div><div id="relationList" class="smallnote"></div><div id="photoPlanState" class="associationStatus" aria-live="polite" hidden></div><div id="markList" class="small" hidden>Sin marcas para esta fotografía</div><div id="markDetails" aria-label="Marcas de la fotografía"></div><div class="audit" id="reviewHint">Clasifica la ubicación y documenta el fundamento de identificación.</div></div></section></main><div id="recordBackdrop" aria-hidden="true"></div><div id="saveProjectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="saveProjectTitle"><div class="projectDialogHeader"><b id="saveProjectTitle">Guardar proyecto en disco</b><button id="closeSaveProject" type="button" aria-label="Cerrar">✕</button></div><label for="projectNameInput" style="display:block;margin:12px 0 7px;font-weight:bold">Nombre del proyecto</label><input id="projectNameInput" type="text" maxlength="100" autocomplete="off"><div class="projectDialogFooter"><button id="cancelSaveProject" type="button">Cancelar</button><button id="confirmSaveProject" class="primary" type="button">Guardar</button></div></div></div><div id="projectDialog" class="projectDialog" hidden><div class="projectDialogPanel" role="dialog" aria-modal="true" aria-labelledby="projectDialogTitle"><div class="projectDialogHeader"><b id="projectDialogTitle">Abrir proyecto</b><button id="closeProjectDialog" type="button" aria-label="Cerrar">✕</button></div><div id="projectChoices"></div></div></div><div id="imageMenu" role="menu"><button id="menuFull">⛶ Pantalla completa</button><button id="menuFit">⤢ Ajustar imagen</button></div><div id="msg" role="status" aria-live="polite" class="visuallyHidden">Aplicación preparada.</div>
@@ -1590,9 +1590,167 @@ const imageData=async(file)=>{let im=await loadImg(file),c=document.createElemen
 function planData(i,r){let im=state.plans[i];if(!im)return null;let c=document.createElement('canvas'),s=Math.min(1,1400/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);let ctx=c.getContext('2d');ctx.drawImage(im,0,0,c.width,c.height);let v={x:0,y:0,w:c.width,h:c.height};for(let n=0;n<(r.marks[i]||[]).length;n++)paintMark(ctx,r.marks[i][n],v,n);return {data:c.toDataURL('image/png'),ratio:c.width/c.height}}
 function addContained(slide,img,x,y,w,h){let iw=w,ih=w/img.ratio;if(ih>h){ih=h;iw=h*img.ratio}slide.addImage({data:img.data,x:x+(w-iw)/2,y:y+(h-ih)/2,w:iw,h:ih})}
 function safe(s){return String(s||'').trim()||'—'}
-async function exportPpt(){if(typeof pptxgen==='undefined'){notify('No se encuentra pptxgen.min.js. Mantén ambos archivos juntos.');return}let selected=state.photoFiles.filter(f=>{let r=getRecord(fileKey(f));return !['excluded','duplicate'].includes(r.quality)&&effectiveStatus(r)!=='pending'});if(!selected.length){notify('No hay fotografías elegibles para exportar.');return}let btn=$('pptBtn');btn.disabled=true;try{let pptx=new pptxgen();pptx.layout='LAYOUT_WIDE';pptx.author='Registro fotográfico TK-5';pptx.subject='Trazabilidad de fotografías y planos TK-5';pptx.title='TK-5 | Informe de inspección fotográfica';pptx.lang='es-ES';const related=(r)=>{const indexes=new Set([...(r.links||[]),...(r.marks||[]).map((m,i)=>m.length?i:-1).filter(i=>i>=0)]);const ids=[...indexes].filter(i=>state.plans[i]);return ids.length?ids:[-1]};let total=selected.reduce((sum,f)=>sum+related(getRecord(fileKey(f))).length,0),slideCount=0;for(let j=0;j<selected.length;j++){let f=selected[j],key=fileKey(f),r=getRecord(key);for(const currentPlan of related(r)){let slide=pptx.addSlide();slideCount++;slide.background={color:'F4F7FA'};slide.addShape(pptx.ShapeType.rect,{x:0,y:0,w:13.333,h:.55,fill:{color:'17354E'},line:{color:'17354E'}});slide.addText('TK-5 · INSPECCIÓN FOTOGRÁFICA',{x:.25,y:.12,w:10,h:.25,fontSize:15,bold:true,color:'FFFFFF',margin:0});slide.addText(`${slideCount} / ${total}`,{x:11.7,y:.12,w:1.3,h:.2,align:'right',fontSize:10,color:'FFFFFF'});let p=await imageData(f);slide.addText('FOTOGRAFÍA',{x:.25,y:.7,w:6.3,h:.25,fontSize:11,bold:true,color:'17354E'});slide.addShape(pptx.ShapeType.rect,{x:.25,y:1.03,w:6.25,h:4.58,fill:{color:'FFFFFF'},line:{color:'CCD5DE'}});addContained(slide,p,.3,1.08,6.15,4.48);let arr=currentPlan<0?[]:[currentPlan];slide.addText('PLANO Y ZONA MARCADA',{x:6.75,y:.7,w:6.2,h:.25,fontSize:11,bold:true,color:'17354E'});if(arr.length){let i=arr[0];slide.addShape(pptx.ShapeType.rect,{x:6.75,y:1.03,w:6.3,h:4.58,fill:{color:'FFFFFF'},line:{color:'CCD5DE'}});addContained(slide,planData(i,r),6.82,1.11,6.15,4.23);slide.addText(planLabel(i),{x:6.85,y:5.35,w:6.0,h:.18,fontSize:8,bold:true,color:'36516B'})}else{slide.addShape(pptx.ShapeType.rect,{x:6.75,y:1.03,w:6.3,h:4.58,fill:{color:'FFFFFF'},line:{color:'CCD5DE'}});slide.addText(r.status==='unlocated'?'UBICACIÓN NO IDENTIFICABLE':'SIN UBICACIÓN MARCADA EN LOS PLANOS',{x:7.1,y:3.05,w:5.4,h:.45,align:'center',fontSize:14,color:'8B5960',bold:true})}
-slide.addShape(pptx.ShapeType.rect,{x:.25,y:5.77,w:12.8,h:1.4,fill:{color:'FFFFFF'},line:{color:'D0D9E3'}});let st={pending:'Pendiente',confirmed:'Confirmada',estimated:'Estimada (no verificada)',identified_unlocated:'Elemento identificado · sin ubicación',unlocated:'Ubicación no identificable'}[effectiveStatus(r)];let qual={usable:'Apta',poor:'Calidad deficiente',excluded:'Omitida',duplicate:'Duplicada'}[r.quality];slide.addText(`ESTADO: ${st}   |   CALIDAD: ${qual}   |   ELEMENTO: ${safe(r.element)}   |   REFERENCIA: ${safe(r.reference)}`,{x:.43,y:5.9,w:12.3,h:.25,fontSize:10,bold:true,color:'17354E',breakLine:false});slide.addText(`OBSERVACIÓN: ${safe(r.notes)}\nFUNDAMENTO DE UBICACIÓN: ${safe(r.criteria)}`,{x:.43,y:6.23,w:12.3,h:.65,fontSize:9,color:'263A4C',breakLine:false,valign:'top'});slide.addText(key+'  |  Planos: '+(r.links||[]).map(i=>planLabel(i)).join(', '),{x:.25,y:7.24,w:11.5,h:.16,fontSize:7,color:'657487'});slide.addText('Archivo original sin modificación',{x:10.8,y:7.24,w:2.2,h:.16,fontSize:7,color:'657487',align:'right'});$('msg').textContent=`Preparando diapositiva ${slideCount} de ${total}...`}}
-await pptx.writeFile({fileName:'TK5_Informe_Fotografico.pptx'});notify(`PowerPoint generado: ${total} diapositivas de ${selected.length} fotografías. Comprueba las ubicaciones estimadas antes de emitir el informe.`)}catch(e){console.error(e);notify('Error exportando PowerPoint: '+e.message)}finally{btn.disabled=false}}
+/* JFLO r44 · Informe: planos a la izquierda, fotografía a la derecha, notas abajo.
+   Exporta los datos de todos los planos relacionados, aunque no estén visibles en la app. */
+async function exportPpt(){
+ if(typeof pptxgen==='undefined'){notify('No se encuentra la biblioteca PowerPoint. Revisa la conexión e intenta nuevamente.');return}
+ const files=state.photoFiles.filter(f=>!['excluded','duplicate'].includes(getRecord(fileKey(f)).quality));
+ if(!files.length){notify('No hay fotografías disponibles para el informe.');return}
+ const button=$('pptBtn');button.disabled=true;
+ try{
+  const pptx=new pptxgen();
+  pptx.layout='LAYOUT_WIDE';
+  pptx.author='Registro fotográfico TK-5';
+  pptx.subject='Planos, fotografías y observaciones técnicas de inspección — TK-5';
+  pptx.title='TK-5 | Informe técnico de inspección fotográfica';
+  pptx.lang='es-ES';
+  const SW=13.333,SH=7.5;
+  const navy='17354E',ink='233C50',light='F4F7FA',outline='CAD5DF';
+  const stateName=r=>({pending:'PENDIENTE',confirmed:'UBICACIÓN CONFIRMADA',
+   estimated:'UBICACIÓN ESTIMADA',identified_unlocated:'SIN UBICACIÓN',
+   unlocated:'SIN UBICACIÓN'})[effectiveStatus(r)]||'PENDIENTE';
+  // No se muestran planos para fotografías expresamente clasificadas sin ubicación.
+  const associated=r=>{
+   if(['unlocated','identified_unlocated'].includes(r.status))return [];
+   const ids=new Set([...(r.links||[]),...(r.marks||[]).map((m,i)=>m?.length?i:-1).filter(i=>i>=0)]);
+   return [...ids].filter(i=>Number.isInteger(i)&&state.plans[i]).sort((a,b)=>a-b);
+  };
+  const groupOf=r=>{
+   const ids=associated(r);
+   return ids.length?ids[0]:effectiveStatus(r)==='unlocated'?state.planNames.length+1:state.planNames.length;
+  };
+  const ordered=[...files].sort((a,b)=>{
+   const ga=groupOf(getRecord(fileKey(a))),gb=groupOf(getRecord(fileKey(b)));
+   return ga-gb||files.indexOf(a)-files.indexOf(b);
+  });
+  const groups=new Map();
+  for(const file of ordered){
+   const group=groupOf(getRecord(fileKey(file)));
+   if(!groups.has(group))groups.set(group,[]);
+   groups.get(group).push(file);
+  }
+  const groupTitle=g=>g<state.planNames.length?'PLANO: '+planLabel(g):
+   g===state.planNames.length?'FOTOGRAFÍAS PENDIENTES':'FOTOGRAFÍAS SIN UBICACIÓN';
+  const groupSub=g=>g<state.planNames.length?'Agrupadas por el primer plano asociado. Se conservan todas las relaciones adicionales.':
+   g===state.planNames.length?'Sin plano asociado o pendientes de vinculación documental.':
+   'Fotografías clasificadas expresamente sin ubicación identificable.';
+  const panel=(slide,x,y,w,h)=>{
+   slide.addShape(pptx.ShapeType.rect,{x,y,w,h,rectRadius:0,
+    fill:{color:'FFFFFF'},line:{color:outline,width:.7}});
+  };
+  const header=(slide,title,subtitle)=>{
+   slide.background={color:light};
+   slide.addShape(pptx.ShapeType.rect,{x:0,y:0,w:SW,h:.57,
+    line:{color:navy},fill:{color:navy}});
+   slide.addText(title,{x:.27,y:.13,w:11.65,h:.23,fontSize:14,bold:true,color:'FFFFFF',margin:0,breakLine:false});
+   slide.addText(subtitle,{x:10.5,y:.16,w:2.52,h:.19,fontSize:8.5,color:'DFEAF2',align:'right',margin:0,breakLine:false});
+  };
+  const footer=(slide,text)=>{
+   slide.addText(text,{x:.25,y:7.19,w:12.84,h:.18,fontSize:7,color:'5A7183',margin:0,breakLine:false});
+  };
+  const statusPanel=(slide,label)=>{
+   panel(slide,.22,1.03,5.05,4.43);
+   slide.addText(label,{x:.47,y:2.83,w:4.55,h:.44,fontSize:19,bold:true,color:'8799A9',
+    align:'center',margin:0});
+   slide.addText('No se asigna plano sin evidencia suficiente.',{x:.46,y:3.37,w:4.58,h:.28,
+    fontSize:9.2,color:'657A8C',align:'center',margin:0});
+  };
+  const planPanel=(slide,id,x,y,w,h)=>{
+   panel(slide,x,y,w,h);
+   const image=planData(id,getRecord(fileKey(activeFile)));
+   if(image){
+    addContained(slide,image,x+.08,y+.09,w-.16,h-.40);
+    slide.addText(planLabel(id),{x:x+.12,y:y+h-.26,w:w-.24,h:.18,
+     fontSize:8.1,bold:true,color:navy,margin:0,breakLine:false});
+   }
+  };
+  // Calculamos todas las diapositivas antes de preparar sus contadores.
+  const sections=[...groups.entries()];
+  const contentCount=sections.reduce((sum,[g,fs])=>sum+fs.reduce((n,file)=>{
+   const count=associated(getRecord(fileKey(file))).length;
+   return n+Math.max(1,Math.ceil(count/2));
+  },0),0);
+  const total=2+sections.length+contentCount;
+  let slideNumber=0,activeFile=null;
+  const pageInfo=()=>String(++slideNumber)+' / '+String(total);
+  // Portada
+  {
+   const slide=pptx.addSlide();header(slide,'TK-5 · INFORME TÉCNICO DE INSPECCIÓN FOTOGRÁFICA',pageInfo());
+   slide.addText('TERMINAL ACAJUTLA',{x:.75,y:1.47,w:11.9,h:.48,fontSize:27,bold:true,color:navy,margin:0});
+   slide.addText('REGISTRO FOTOGRÁFICO Y TRAZABILIDAD EN PLANOS',{x:.77,y:2.14,w:11.75,h:.56,fontSize:19,color:ink,margin:0});
+   slide.addShape(pptx.ShapeType.line,{x:.77,y:3.04,w:11.75,h:0,line:{color:'2A769C',width:2}});
+   slide.addText('Fotografías: '+files.length+'   |   Planos cargados: '+state.plans.filter(Boolean).length+
+    '   |   Secciones: '+sections.length,{x:.77,y:3.45,w:11.7,h:.35,fontSize:14,color:ink,margin:0});
+   slide.addText('Documento de revisión técnica. Las relaciones con planos no implican, por sí mismas, ubicación confirmada.',{
+    x:.77,y:4.25,w:11.8,h:.9,fontSize:12,color:'5B6F81',margin:0,valign:'top'});
+   footer(slide,'TK-5 · Terminal Acajutla · Análisis del registro fotográfico');
+  }
+  // Resumen de clasificación y reglas de evidencia
+  {
+   const slide=pptx.addSlide();header(slide,'RESUMEN DEL REGISTRO FOTOGRÁFICO',pageInfo());
+   const stat=[
+    ['Ubicación confirmada',files.filter(file=>effectiveStatus(getRecord(fileKey(file)))==='confirmed').length],
+    ['Ubicación estimada',files.filter(file=>effectiveStatus(getRecord(fileKey(file)))==='estimated').length],
+    ['Pendiente',files.filter(file=>effectiveStatus(getRecord(fileKey(file)))==='pending').length],
+    ['Sin ubicación',files.filter(file=>effectiveStatus(getRecord(fileKey(file)))==='unlocated').length],
+    ['Fotografías con varios planos',files.filter(file=>associated(getRecord(fileKey(file))).length>1).length]
+   ];
+   stat.forEach(([label,value],i)=>{
+    const y=1.17+i*.73;panel(slide,.7,y,11.9,.61);
+    slide.addText(label,{x:1,y:y+.16,w:9.3,h:.21,fontSize:13,color:ink,margin:0});
+    slide.addText(String(value),{x:10.53,y:y+.12,w:1.5,h:.28,fontSize:17,bold:true,color:navy,align:'right',margin:0});
+   });
+   slide.addText('Cada marca se reproduce únicamente en el plano y la fotografía a los que está asociada. Las fotografías pendientes y sin ubicación se identifican sin inferir posiciones.',{
+    x:.8,y:5.24,w:11.9,h:.95,fontSize:11,color:'4D6174',margin:0});
+   footer(slide,'Resumen obtenido de los registros de clasificación disponibles en el proyecto.');
+  }
+  for(const [group,groupFiles] of sections){
+   const sectionSlide=pptx.addSlide();
+   header(sectionSlide,'SECCIÓN · '+groupTitle(group),pageInfo());
+   sectionSlide.addText(groupTitle(group),{x:.7,y:2.00,w:12.0,h:.65,fontSize:24,bold:true,color:navy,margin:0});
+   sectionSlide.addText(groupSub(group),{x:.73,y:2.91,w:11.8,h:.85,fontSize:14,color:ink,margin:0});
+   sectionSlide.addText('Fotografías en esta sección: '+groupFiles.length,{x:.73,y:4.20,w:11.5,h:.3,
+     fontSize:13,color:'517086',margin:0});
+   footer(sectionSlide,'Las marcas y notas de cada fotografía se conservan en las diapositivas individuales.');
+   for(const file of groupFiles){
+    activeFile=file;
+    const key=fileKey(file),r=getRecord(key),ids=associated(r);
+    const pages=Math.max(1,Math.ceil(ids.length/2));
+    const photo=await imageData(file); // Incluye todas las anotaciones gráficas propias de la fotografía.
+    for(let part=0;part<pages;part++){
+     const page= pptx.addSlide();
+     const count=pageInfo(),paired=ids.slice(part*2,part*2+2);
+     header(page,'TK-5 · REGISTRO DE INSPECCIÓN FOTOGRÁFICA',count);
+     page.addText('PLANO(S) DE UBICACIÓN',{x:.23,y:.70,w:5.02,h:.22,
+       fontSize:10.5,bold:true,color:navy,margin:0});
+     page.addText('FOTOGRAFÍA',{x:5.46,y:.70,w:7.58,h:.22,
+       fontSize:10.5,bold:true,color:navy,margin:0});
+     if(!paired.length)statusPanel(page,effectiveStatus(r)==='unlocated'?'SIN UBICACIÓN':'PENDIENTE');
+     else if(paired.length===1)planPanel(page,paired[0],.22,1.02,5.05,4.46);
+     else{
+      planPanel(page,paired[0],.22,1.02,5.05,2.18);
+      planPanel(page,paired[1],.22,3.27,5.05,2.18);
+     }
+     panel(page,5.44,1.02,7.63,4.46);
+     addContained(page,photo,5.52,1.10,7.47,4.30);
+     panel(page,.22,5.66,12.85,1.35);
+     page.addText('ESTADO: '+stateName(r)+(pages>1?'  |  PLANOS '+(part*2+1)+'–'+Math.min(ids.length,(part+1)*2)+' DE '+ids.length:''),{
+      x:.36,y:5.76,w:12.5,h:.19,fontSize:9.7,bold:true,color:navy,margin:0});
+     const notes='CONDICIÓN OBSERVADA: '+safe(r.notes)+'\nEVIDENCIA DE UBICACIÓN: '+safe(r.criteria);
+     page.addText(notes,{x:.36,y:6.04,w:12.48,h:.74,fontSize:9.3,color:ink,margin:0,
+      valign:'top',breakLine:false,fit:'shrink'});
+     const allPlanNames=ids.length?ids.map(i=>planLabel(i)).join(' | '):'Sin plano asociado';
+     footer(page,'Archivo: '+key+'    ·    Planos asociados: '+allPlanNames);
+    }
+    if(slideNumber%4===0)$('msg').textContent='Generando informe: '+slideNumber+' de '+total+' diapositivas…';
+   }
+  }
+  await pptx.writeFile({fileName:'TK5_Informe_Fotografico.pptx'});
+  notify('PowerPoint generado: '+slideNumber+' diapositivas, '+files.length+
+   ' fotografías, con planos a la izquierda y fotografías a la derecha.');
+ }catch(e){console.error(e);notify('Error exportando PowerPoint: '+e.message)}
+ finally{button.disabled=false}
+}
 $('pptBtn').onclick=exportPpt;
 
 /* Zoom con rueda: ambos planos y visor fotográfico. Evita el desplazamiento de la página. */
